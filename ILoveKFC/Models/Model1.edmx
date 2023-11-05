@@ -1,0 +1,677 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QL_KFCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACCOUNT_CUSTOMER">
+          <Key>
+            <PropertyRef Name="USERNAME_CUSTOMER" />
+          </Key>
+          <Property Name="USERNAME_CUSTOMER" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD_CUSTOMER" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_CUSTOMER" Type="char" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACCOUNT_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="USERNAME_EMPLOYEE" />
+          </Key>
+          <Property Name="USERNAME_EMPLOYEE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD_EMPLOYEE" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_EMPLOYEE" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="TYPE_ACCOUNT" Type="int" />
+        </EntityType>
+        <EntityType Name="CART">
+          <Key>
+            <PropertyRef Name="ID_PRODUCT" />
+            <PropertyRef Name="ID_CUSTOMER" />
+          </Key>
+          <Property Name="ID_PRODUCT" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="ID_CUSTOMER" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="IMAGE_PRODUCT" Type="nvarchar(max)" />
+          <Property Name="DESCRIBE" Type="nvarchar(max)" />
+          <Property Name="NAME_PRODUCT" Type="nvarchar" MaxLength="50" />
+          <Property Name="COST" Type="int" />
+          <Property Name="QUANTITY_PRODUCT" Type="int" />
+          <Property Name="TOTAL" Type="int" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="ID_CATEGORY" />
+          </Key>
+          <Property Name="ID_CATEGORY" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="NAME_CATEGORY" Type="nvarchar" MaxLength="50" />
+          <Property Name="POSITION" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="ID_CUSTOMER" />
+          </Key>
+          <Property Name="ID_CUSTOMER" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="NAME_CUSTOMER" Type="nvarchar" MaxLength="50" />
+          <Property Name="DATEOFBIRTH_CUSTOMER" Type="datetime" />
+          <Property Name="ADDRESS_CITY" Type="nvarchar(max)" />
+          <Property Name="ADDRESS_DISTRICT" Type="nvarchar(max)" />
+          <Property Name="ADDRESS_WARD" Type="nvarchar(max)" />
+          <Property Name="ADDRESS_CUSTOMER" Type="nvarchar(max)" />
+          <Property Name="PHONE_CUSTOMER" Type="char" MaxLength="11" />
+          <Property Name="GMAIL" Type="nvarchar" MaxLength="30" />
+          <Property Name="SEX_CUSTOMER" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="DETAIL_RECEIPT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="ID_RECEIPT" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="ID_PRODUCT" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="COST" Type="int" />
+        </EntityType>
+        <EntityType Name="DISCOUNT">
+          <Key>
+            <PropertyRef Name="CODE_DISCOUNT" />
+          </Key>
+          <Property Name="CODE_DISCOUNT" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="PERCENT_DISCOUNT" Type="int" />
+          <Property Name="MONEY_DISCOUNT" Type="float" />
+          <Property Name="START_DAY" Type="date" />
+          <Property Name="END_DAY" Type="date" />
+          <Property Name="QUANTITY" Type="int" />
+        </EntityType>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="ID_EMPLOYEE" />
+          </Key>
+          <Property Name="ID_EMPLOYEE" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="NAME_EMPLOYEE" Type="nvarchar" MaxLength="50" />
+          <Property Name="DATEOFBIRTH_EMPLOYEE" Type="datetime" />
+          <Property Name="ADDRESS_EMPLOYEE" Type="nvarchar(max)" />
+          <Property Name="PHONE_EMPLOYEE" Type="char" MaxLength="11" />
+          <Property Name="GMAIL" Type="nvarchar" MaxLength="30" />
+          <Property Name="SEX_EMPLOYEE" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="ID_PRODUCT" />
+          </Key>
+          <Property Name="ID_PRODUCT" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="NAME_PRODUCT" Type="nvarchar" MaxLength="50" />
+          <Property Name="COST" Type="int" />
+          <Property Name="DESCRIBE" Type="nvarchar(max)" />
+          <Property Name="IMAGE_PRODUCT" Type="nvarchar(max)" />
+          <Property Name="ID_CATEGORY" Type="char" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RECEIPT">
+          <Key>
+            <PropertyRef Name="ID_RECEIPT" />
+          </Key>
+          <Property Name="ID_RECEIPT" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="ID_CUSTOMER" Type="char" MaxLength="50" />
+          <Property Name="ORDER_DATE" Type="datetime" />
+          <Property Name="DELIVERY_DATE" Type="datetime" />
+          <Property Name="STATUS_RECEIPT" Type="nvarchar(max)" />
+          <Property Name="CODE_DISCOUNT" Type="char" MaxLength="50" />
+          <Property Name="TOTAL" Type="money" />
+        </EntityType>
+        <Association Name="FK_ACC_CUS_TO_CUS">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="ACCOUNT_CUSTOMER" Type="Self.ACCOUNT_CUSTOMER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="ACCOUNT_CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACC_EMP_TO_EMP">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ACCOUNT_EMPLOYEE" Type="Self.ACCOUNT_EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="ID_EMPLOYEE" />
+            </Principal>
+            <Dependent Role="ACCOUNT_EMPLOYEE">
+              <PropertyRef Name="ID_EMPLOYEE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CART_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="CART" Type="Self.CART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="CART">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETAIL_RECEIPT_TO_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="DETAIL_RECEIPT" Type="Self.DETAIL_RECEIPT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Principal>
+            <Dependent Role="DETAIL_RECEIPT">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETAIL_RECEIPT_TO_RECEIPT">
+          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="1" />
+          <End Role="DETAIL_RECEIPT" Type="Self.DETAIL_RECEIPT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECEIPT">
+              <PropertyRef Name="ID_RECEIPT" />
+            </Principal>
+            <Dependent Role="DETAIL_RECEIPT">
+              <PropertyRef Name="ID_RECEIPT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRO_CATE">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="0..1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="ID_CATEGORY" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="ID_CATEGORY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECEIPT_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
+          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="RECEIPT">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECEIPT_DISCOUNT">
+          <End Role="DISCOUNT" Type="Self.DISCOUNT" Multiplicity="0..1" />
+          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCOUNT">
+              <PropertyRef Name="CODE_DISCOUNT" />
+            </Principal>
+            <Dependent Role="RECEIPT">
+              <PropertyRef Name="CODE_DISCOUNT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QL_KFCModelStoreContainer">
+          <EntitySet Name="ACCOUNT_CUSTOMER" EntityType="Self.ACCOUNT_CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACCOUNT_EMPLOYEE" EntityType="Self.ACCOUNT_EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CART" EntityType="Self.CART" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETAIL_RECEIPT" EntityType="Self.DETAIL_RECEIPT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DISCOUNT" EntityType="Self.DISCOUNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECEIPT" EntityType="Self.RECEIPT" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ACC_CUS_TO_CUS" Association="Self.FK_ACC_CUS_TO_CUS">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="ACCOUNT_CUSTOMER" EntitySet="ACCOUNT_CUSTOMER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACC_EMP_TO_EMP" Association="Self.FK_ACC_EMP_TO_EMP">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="ACCOUNT_EMPLOYEE" EntitySet="ACCOUNT_EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CART_CUSTOMER" Association="Self.FK_CART_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="CART" EntitySet="CART" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETAIL_RECEIPT_TO_PRODUCT" Association="Self.FK_DETAIL_RECEIPT_TO_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+            <End Role="DETAIL_RECEIPT" EntitySet="DETAIL_RECEIPT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETAIL_RECEIPT_TO_RECEIPT" Association="Self.FK_DETAIL_RECEIPT_TO_RECEIPT">
+            <End Role="RECEIPT" EntitySet="RECEIPT" />
+            <End Role="DETAIL_RECEIPT" EntitySet="DETAIL_RECEIPT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRO_CATE" Association="Self.FK_PRO_CATE">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="PRODUCT" EntitySet="PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEIPT_CUSTOMER" Association="Self.FK_RECEIPT_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="RECEIPT" EntitySet="RECEIPT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEIPT_DISCOUNT" Association="Self.FK_RECEIPT_DISCOUNT">
+            <End Role="DISCOUNT" EntitySet="DISCOUNT" />
+            <End Role="RECEIPT" EntitySet="RECEIPT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QL_KFCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACCOUNT_CUSTOMER">
+          <Key>
+            <PropertyRef Name="USERNAME_CUSTOMER" />
+          </Key>
+          <Property Name="USERNAME_CUSTOMER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PASSWORD_CUSTOMER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_CUSTOMER" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_ACC_CUS_TO_CUS" FromRole="ACCOUNT_CUSTOMER" ToRole="CUSTOMER" />
+        </EntityType>
+        <EntityType Name="ACCOUNT_EMPLOYEE">
+          <Key>
+            <PropertyRef Name="USERNAME_EMPLOYEE" />
+          </Key>
+          <Property Name="USERNAME_EMPLOYEE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PASSWORD_EMPLOYEE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_EMPLOYEE" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TYPE_ACCOUNT" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK_ACC_EMP_TO_EMP" FromRole="ACCOUNT_EMPLOYEE" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="CART">
+          <Key>
+            <PropertyRef Name="ID_PRODUCT" />
+            <PropertyRef Name="ID_CUSTOMER" />
+          </Key>
+          <Property Name="ID_PRODUCT" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_CUSTOMER" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IMAGE_PRODUCT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIBE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NAME_PRODUCT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COST" Type="Int32" />
+          <Property Name="QUANTITY_PRODUCT" Type="Int32" />
+          <Property Name="TOTAL" Type="Int32" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_CART_CUSTOMER" FromRole="CART" ToRole="CUSTOMER" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="ID_CATEGORY" />
+          </Key>
+          <Property Name="ID_CATEGORY" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NAME_CATEGORY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="POSITION" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="PRODUCTs" Relationship="Self.FK_PRO_CATE" FromRole="CATEGORY" ToRole="PRODUCT" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="ID_CUSTOMER" />
+          </Key>
+          <Property Name="ID_CUSTOMER" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NAME_CUSTOMER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DATEOFBIRTH_CUSTOMER" Type="DateTime" Precision="3" />
+          <Property Name="ADDRESS_CITY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS_DISTRICT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS_WARD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS_CUSTOMER" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PHONE_CUSTOMER" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="GMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SEX_CUSTOMER" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="ACCOUNT_CUSTOMER" Relationship="Self.FK_ACC_CUS_TO_CUS" FromRole="CUSTOMER" ToRole="ACCOUNT_CUSTOMER" />
+          <NavigationProperty Name="CARTs" Relationship="Self.FK_CART_CUSTOMER" FromRole="CUSTOMER" ToRole="CART" />
+          <NavigationProperty Name="RECEIPTs" Relationship="Self.FK_RECEIPT_CUSTOMER" FromRole="CUSTOMER" ToRole="RECEIPT" />
+        </EntityType>
+        <EntityType Name="DETAIL_RECEIPT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_RECEIPT" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_PRODUCT" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="COST" Type="Int32" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK_DETAIL_RECEIPT_TO_PRODUCT" FromRole="DETAIL_RECEIPT" ToRole="PRODUCT" />
+          <NavigationProperty Name="RECEIPT" Relationship="Self.FK_DETAIL_RECEIPT_TO_RECEIPT" FromRole="DETAIL_RECEIPT" ToRole="RECEIPT" />
+        </EntityType>
+        <EntityType Name="DISCOUNT">
+          <Key>
+            <PropertyRef Name="CODE_DISCOUNT" />
+          </Key>
+          <Property Name="CODE_DISCOUNT" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PERCENT_DISCOUNT" Type="Int32" />
+          <Property Name="MONEY_DISCOUNT" Type="Double" />
+          <Property Name="START_DAY" Type="DateTime" Precision="0" />
+          <Property Name="END_DAY" Type="DateTime" Precision="0" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <NavigationProperty Name="RECEIPTs" Relationship="Self.FK_RECEIPT_DISCOUNT" FromRole="DISCOUNT" ToRole="RECEIPT" />
+        </EntityType>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="ID_EMPLOYEE" />
+          </Key>
+          <Property Name="ID_EMPLOYEE" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NAME_EMPLOYEE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DATEOFBIRTH_EMPLOYEE" Type="DateTime" Precision="3" />
+          <Property Name="ADDRESS_EMPLOYEE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PHONE_EMPLOYEE" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="GMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SEX_EMPLOYEE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="ACCOUNT_EMPLOYEE" Relationship="Self.FK_ACC_EMP_TO_EMP" FromRole="EMPLOYEE" ToRole="ACCOUNT_EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="ID_PRODUCT" />
+          </Key>
+          <Property Name="ID_PRODUCT" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NAME_PRODUCT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COST" Type="Int32" />
+          <Property Name="DESCRIBE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IMAGE_PRODUCT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID_CATEGORY" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CATEGORY" Relationship="Self.FK_PRO_CATE" FromRole="PRODUCT" ToRole="CATEGORY" />
+          <NavigationProperty Name="DETAIL_RECEIPT" Relationship="Self.FK_DETAIL_RECEIPT_TO_PRODUCT" FromRole="PRODUCT" ToRole="DETAIL_RECEIPT" />
+        </EntityType>
+        <EntityType Name="RECEIPT">
+          <Key>
+            <PropertyRef Name="ID_RECEIPT" />
+          </Key>
+          <Property Name="ID_RECEIPT" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_CUSTOMER" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="ORDER_DATE" Type="DateTime" Precision="3" />
+          <Property Name="DELIVERY_DATE" Type="DateTime" Precision="3" />
+          <Property Name="STATUS_RECEIPT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CODE_DISCOUNT" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="TOTAL" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_RECEIPT_CUSTOMER" FromRole="RECEIPT" ToRole="CUSTOMER" />
+          <NavigationProperty Name="DETAIL_RECEIPT" Relationship="Self.FK_DETAIL_RECEIPT_TO_RECEIPT" FromRole="RECEIPT" ToRole="DETAIL_RECEIPT" />
+          <NavigationProperty Name="DISCOUNT" Relationship="Self.FK_RECEIPT_DISCOUNT" FromRole="RECEIPT" ToRole="DISCOUNT" />
+        </EntityType>
+        <Association Name="FK_ACC_CUS_TO_CUS">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="ACCOUNT_CUSTOMER" Type="Self.ACCOUNT_CUSTOMER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="ACCOUNT_CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ACC_EMP_TO_EMP">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="ACCOUNT_EMPLOYEE" Type="Self.ACCOUNT_EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="ID_EMPLOYEE" />
+            </Principal>
+            <Dependent Role="ACCOUNT_EMPLOYEE">
+              <PropertyRef Name="ID_EMPLOYEE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CART_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="CART" Type="Self.CART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="CART">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRO_CATE">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="0..1" />
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="ID_CATEGORY" />
+            </Principal>
+            <Dependent Role="PRODUCT">
+              <PropertyRef Name="ID_CATEGORY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECEIPT_CUSTOMER">
+          <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
+          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Principal>
+            <Dependent Role="RECEIPT">
+              <PropertyRef Name="ID_CUSTOMER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETAIL_RECEIPT_TO_PRODUCT">
+          <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
+          <End Role="DETAIL_RECEIPT" Type="Self.DETAIL_RECEIPT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Principal>
+            <Dependent Role="DETAIL_RECEIPT">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETAIL_RECEIPT_TO_RECEIPT">
+          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="1" />
+          <End Role="DETAIL_RECEIPT" Type="Self.DETAIL_RECEIPT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECEIPT">
+              <PropertyRef Name="ID_RECEIPT" />
+            </Principal>
+            <Dependent Role="DETAIL_RECEIPT">
+              <PropertyRef Name="ID_RECEIPT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECEIPT_DISCOUNT">
+          <End Role="DISCOUNT" Type="Self.DISCOUNT" Multiplicity="0..1" />
+          <End Role="RECEIPT" Type="Self.RECEIPT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCOUNT">
+              <PropertyRef Name="CODE_DISCOUNT" />
+            </Principal>
+            <Dependent Role="RECEIPT">
+              <PropertyRef Name="CODE_DISCOUNT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QL_KFCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACCOUNT_CUSTOMER" EntityType="Self.ACCOUNT_CUSTOMER" />
+          <EntitySet Name="ACCOUNT_EMPLOYEE" EntityType="Self.ACCOUNT_EMPLOYEE" />
+          <EntitySet Name="CARTs" EntityType="Self.CART" />
+          <EntitySet Name="CATEGORies" EntityType="Self.CATEGORY" />
+          <EntitySet Name="CUSTOMERs" EntityType="Self.CUSTOMER" />
+          <EntitySet Name="DETAIL_RECEIPT" EntityType="Self.DETAIL_RECEIPT" />
+          <EntitySet Name="DISCOUNTs" EntityType="Self.DISCOUNT" />
+          <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
+          <EntitySet Name="PRODUCTs" EntityType="Self.PRODUCT" />
+          <EntitySet Name="RECEIPTs" EntityType="Self.RECEIPT" />
+          <AssociationSet Name="FK_ACC_CUS_TO_CUS" Association="Self.FK_ACC_CUS_TO_CUS">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="ACCOUNT_CUSTOMER" EntitySet="ACCOUNT_CUSTOMER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ACC_EMP_TO_EMP" Association="Self.FK_ACC_EMP_TO_EMP">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="ACCOUNT_EMPLOYEE" EntitySet="ACCOUNT_EMPLOYEE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CART_CUSTOMER" Association="Self.FK_CART_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="CART" EntitySet="CARTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRO_CATE" Association="Self.FK_PRO_CATE">
+            <End Role="CATEGORY" EntitySet="CATEGORies" />
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEIPT_CUSTOMER" Association="Self.FK_RECEIPT_CUSTOMER">
+            <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
+            <End Role="RECEIPT" EntitySet="RECEIPTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETAIL_RECEIPT_TO_PRODUCT" Association="Self.FK_DETAIL_RECEIPT_TO_PRODUCT">
+            <End Role="PRODUCT" EntitySet="PRODUCTs" />
+            <End Role="DETAIL_RECEIPT" EntitySet="DETAIL_RECEIPT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETAIL_RECEIPT_TO_RECEIPT" Association="Self.FK_DETAIL_RECEIPT_TO_RECEIPT">
+            <End Role="RECEIPT" EntitySet="RECEIPTs" />
+            <End Role="DETAIL_RECEIPT" EntitySet="DETAIL_RECEIPT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEIPT_DISCOUNT" Association="Self.FK_RECEIPT_DISCOUNT">
+            <End Role="DISCOUNT" EntitySet="DISCOUNTs" />
+            <End Role="RECEIPT" EntitySet="RECEIPTs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QL_KFCModelStoreContainer" CdmEntityContainer="QL_KFCEntities">
+          <EntitySetMapping Name="ACCOUNT_CUSTOMER">
+            <EntityTypeMapping TypeName="QL_KFCModel.ACCOUNT_CUSTOMER">
+              <MappingFragment StoreEntitySet="ACCOUNT_CUSTOMER">
+                <ScalarProperty Name="USERNAME_CUSTOMER" ColumnName="USERNAME_CUSTOMER" />
+                <ScalarProperty Name="PASSWORD_CUSTOMER" ColumnName="PASSWORD_CUSTOMER" />
+                <ScalarProperty Name="ID_CUSTOMER" ColumnName="ID_CUSTOMER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACCOUNT_EMPLOYEE">
+            <EntityTypeMapping TypeName="QL_KFCModel.ACCOUNT_EMPLOYEE">
+              <MappingFragment StoreEntitySet="ACCOUNT_EMPLOYEE">
+                <ScalarProperty Name="USERNAME_EMPLOYEE" ColumnName="USERNAME_EMPLOYEE" />
+                <ScalarProperty Name="PASSWORD_EMPLOYEE" ColumnName="PASSWORD_EMPLOYEE" />
+                <ScalarProperty Name="ID_EMPLOYEE" ColumnName="ID_EMPLOYEE" />
+                <ScalarProperty Name="TYPE_ACCOUNT" ColumnName="TYPE_ACCOUNT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARTs">
+            <EntityTypeMapping TypeName="QL_KFCModel.CART">
+              <MappingFragment StoreEntitySet="CART">
+                <ScalarProperty Name="ID_PRODUCT" ColumnName="ID_PRODUCT" />
+                <ScalarProperty Name="ID_CUSTOMER" ColumnName="ID_CUSTOMER" />
+                <ScalarProperty Name="IMAGE_PRODUCT" ColumnName="IMAGE_PRODUCT" />
+                <ScalarProperty Name="DESCRIBE" ColumnName="DESCRIBE" />
+                <ScalarProperty Name="NAME_PRODUCT" ColumnName="NAME_PRODUCT" />
+                <ScalarProperty Name="COST" ColumnName="COST" />
+                <ScalarProperty Name="QUANTITY_PRODUCT" ColumnName="QUANTITY_PRODUCT" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORies">
+            <EntityTypeMapping TypeName="QL_KFCModel.CATEGORY">
+              <MappingFragment StoreEntitySet="CATEGORY">
+                <ScalarProperty Name="ID_CATEGORY" ColumnName="ID_CATEGORY" />
+                <ScalarProperty Name="NAME_CATEGORY" ColumnName="NAME_CATEGORY" />
+                <ScalarProperty Name="POSITION" ColumnName="POSITION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMERs">
+            <EntityTypeMapping TypeName="QL_KFCModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="ID_CUSTOMER" ColumnName="ID_CUSTOMER" />
+                <ScalarProperty Name="NAME_CUSTOMER" ColumnName="NAME_CUSTOMER" />
+                <ScalarProperty Name="DATEOFBIRTH_CUSTOMER" ColumnName="DATEOFBIRTH_CUSTOMER" />
+                <ScalarProperty Name="ADDRESS_CITY" ColumnName="ADDRESS_CITY" />
+                <ScalarProperty Name="ADDRESS_DISTRICT" ColumnName="ADDRESS_DISTRICT" />
+                <ScalarProperty Name="ADDRESS_WARD" ColumnName="ADDRESS_WARD" />
+                <ScalarProperty Name="ADDRESS_CUSTOMER" ColumnName="ADDRESS_CUSTOMER" />
+                <ScalarProperty Name="PHONE_CUSTOMER" ColumnName="PHONE_CUSTOMER" />
+                <ScalarProperty Name="GMAIL" ColumnName="GMAIL" />
+                <ScalarProperty Name="SEX_CUSTOMER" ColumnName="SEX_CUSTOMER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETAIL_RECEIPT">
+            <EntityTypeMapping TypeName="QL_KFCModel.DETAIL_RECEIPT">
+              <MappingFragment StoreEntitySet="DETAIL_RECEIPT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_RECEIPT" ColumnName="ID_RECEIPT" />
+                <ScalarProperty Name="ID_PRODUCT" ColumnName="ID_PRODUCT" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="COST" ColumnName="COST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISCOUNTs">
+            <EntityTypeMapping TypeName="QL_KFCModel.DISCOUNT">
+              <MappingFragment StoreEntitySet="DISCOUNT">
+                <ScalarProperty Name="CODE_DISCOUNT" ColumnName="CODE_DISCOUNT" />
+                <ScalarProperty Name="PERCENT_DISCOUNT" ColumnName="PERCENT_DISCOUNT" />
+                <ScalarProperty Name="MONEY_DISCOUNT" ColumnName="MONEY_DISCOUNT" />
+                <ScalarProperty Name="START_DAY" ColumnName="START_DAY" />
+                <ScalarProperty Name="END_DAY" ColumnName="END_DAY" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYEEs">
+            <EntityTypeMapping TypeName="QL_KFCModel.EMPLOYEE">
+              <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="ID_EMPLOYEE" ColumnName="ID_EMPLOYEE" />
+                <ScalarProperty Name="NAME_EMPLOYEE" ColumnName="NAME_EMPLOYEE" />
+                <ScalarProperty Name="DATEOFBIRTH_EMPLOYEE" ColumnName="DATEOFBIRTH_EMPLOYEE" />
+                <ScalarProperty Name="ADDRESS_EMPLOYEE" ColumnName="ADDRESS_EMPLOYEE" />
+                <ScalarProperty Name="PHONE_EMPLOYEE" ColumnName="PHONE_EMPLOYEE" />
+                <ScalarProperty Name="GMAIL" ColumnName="GMAIL" />
+                <ScalarProperty Name="SEX_EMPLOYEE" ColumnName="SEX_EMPLOYEE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTs">
+            <EntityTypeMapping TypeName="QL_KFCModel.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCT">
+                <ScalarProperty Name="ID_PRODUCT" ColumnName="ID_PRODUCT" />
+                <ScalarProperty Name="NAME_PRODUCT" ColumnName="NAME_PRODUCT" />
+                <ScalarProperty Name="COST" ColumnName="COST" />
+                <ScalarProperty Name="DESCRIBE" ColumnName="DESCRIBE" />
+                <ScalarProperty Name="IMAGE_PRODUCT" ColumnName="IMAGE_PRODUCT" />
+                <ScalarProperty Name="ID_CATEGORY" ColumnName="ID_CATEGORY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECEIPTs">
+            <EntityTypeMapping TypeName="QL_KFCModel.RECEIPT">
+              <MappingFragment StoreEntitySet="RECEIPT">
+                <ScalarProperty Name="ID_RECEIPT" ColumnName="ID_RECEIPT" />
+                <ScalarProperty Name="ID_CUSTOMER" ColumnName="ID_CUSTOMER" />
+                <ScalarProperty Name="ORDER_DATE" ColumnName="ORDER_DATE" />
+                <ScalarProperty Name="DELIVERY_DATE" ColumnName="DELIVERY_DATE" />
+                <ScalarProperty Name="STATUS_RECEIPT" ColumnName="STATUS_RECEIPT" />
+                <ScalarProperty Name="CODE_DISCOUNT" ColumnName="CODE_DISCOUNT" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

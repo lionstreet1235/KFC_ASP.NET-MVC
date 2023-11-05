@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ILoveKFC.Models.DETAIL_RECEIPT>
+
+@{
+    ViewBag.Title = "DetailReceipt";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="content_bot_title">
+    <h3>Hóa Đơn @ViewBag.Mahd của Khách Hàng @ViewBag.Tenkh</h3>
+</div>
+<table class="table table-sm table-light">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>ID Sản Phẩm</td>
+            <td>Số Lượng</td>
+            <td>Giá</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.ID_PRODUCT</td>
+                <td>@item.QUANTITY</td>
+                <td>@item.COST</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

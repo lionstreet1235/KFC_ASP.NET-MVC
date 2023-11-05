@@ -1,0 +1,204 @@
+﻿@model ILoveKFC.Models.CUSTOMER
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/_LayoutKFC.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="~/Asset/css/register.css">
+<link rel="stylesheet" href="~/Asset/css/inputCss.css">
+<style>
+    .text_red {
+        color: red;
+    }
+</style>
+<div class="container__register">
+    <div class="wrapper__register">
+        <div class="register">
+            <h2 class="register__title">HÃY LÀ MỘT THÀNH VIÊN CỦA KFC HÔM NAY!</h2>
+            <div class="register__subTitle">
+                Tận hưởng là thành viên KFC với các ưu đãi & khuyến mãi đặc biệt!
+            </div>
+            <div class="register__form">
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    {
+                        <input type="hidden" name="csrf_site_name" />
+                        <div class="register__formTop">
+                            <h2 class="register__formTop-title">Giao hàng tới</h2>
+                            <div class="form-label-group">
+                                <div class="page">
+                                    <label class="field field_v1">
+                                        <input class="field__input" name="txtusername" placeholder="Username">
+                                        <span class="field__label-wrap">
+                                            <span class="field__label">Username</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errUsername"]</p>
+                            <div class="form-label-group">
+                                <div class="page">
+                                    <label class="field field_v1">
+                                        <input class="field__input" name="txtpassword" placeholder="Password">
+                                        <span class="field__label-wrap">
+                                            <span class="field__label">Password</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errPass"]</p>
+                            <div class="form-label-group">
+                                <div class="page">
+                                    <label class="field field_v1">
+                                        <input class="field__input" name="txtrepassword" placeholder="Retype Password">
+                                        <span class="field__label-wrap">
+                                            <span class="field__label">Retype Password</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errRepass"]</p>
+                            <div class="form-label-group">
+                                <div class="page">
+                                    <label class="field field_v1">
+                                        <input class="field__input" name="txtname" placeholder="Name">
+                                        <span class="field__label-wrap">
+                                            <span class="field__label">Name</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errName"]</p>
+                            <div class="form-label-group">
+                                <div class="page">
+                                    <label class="field field_v1">
+                                        <input class="field__input" name="txtphone" placeholder="Number Phone">
+                                        <span class="field__label-wrap">
+                                            <span class="field__label">Number Phone</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errPhone"]</p>
+                            <div class="register__formTop-select">
+                                <label><span>Giới Tính<i class='text-danger'>*</i></span></label>
+                                <div class="selectpicker_form">
+                                    <select class="form-select" name="sex" id="select_district">
+                                        <option value="">Giới Tính</option>
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errSex"]</p>
+                            <div class="form-label-group">
+                                <div class="page">
+                                    <label class="field field_v1">
+                                        <input class="field__input" name="txtEmail" placeholder="Email">
+                                        <span class="field__label-wrap">
+                                            <span class="field__label">Email</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errEmail"]</p>
+                            <div class="register__formTop-select">
+                                <label><span>Tỉnh/Thành phố <i class='text-danger'>*</i></span></label>
+                                <div>
+                                    <select class="form-select" name="city" id="select_city">
+                                        <option value="">Tỉnh/Thành phố</option>
+                                        <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                                        <option value="Hà Nội">Hà Nội</option>
+                                        <option value="Bắc Ninh">Bắc Ninh</option>
+                                        <option value="Hải Dương">Hải Dương</option>
+                                        <option value="Hải Phòng">Hải Phòng</option>
+                                        <option value="Lạng Sơn">Lạng Sơn</option>
+                                        <option value="Nam Định">Nam Định</option>
+                                        <option value="Hưng Yên">Hưng Yên</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errCity"]</p>
+                            <div class="register__formTop-select">
+                                <label><span>Quận/Huyện <i class='text-danger'>*</i></span></label>
+                                <div class="selectpicker_form">
+                                    <select class="form-select" name="district" id="select_district">
+                                        <option value="">Quận/Huyện</option>
+                                        <option value="Quận 1">Quận 1</option>
+                                        <option value="Quận 2">Quận 2</option>
+                                        <option value="Quận 3">Quận 3</option>
+                                        <option value="Quận 4">Quận 4</option>
+                                        <option value="Quận 5">Quận 5</option>
+                                        <option value="Quận 6">Quận 6</option>
+                                        <option value="Quận 7">Quận 7</option>
+                                        <option value="Quận 8">Quận 8</option>
+                                        <option value="Quận 9">Quận 9</option>
+                                        <option value="Quận 10">Quận 10</option>
+                                        <option value="Quận 11">Quận 11</option>
+                                        <option value="Quận 12">Quận 12</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errDistrict"]</p>
+                            <div class="register__formTop-select">
+                                <label><span>Phường/Xã <i class='text-danger'>*</i></span></label>
+                                <div class="selectpicker_form">
+                                    <select class="form-select" name="ward" id="select_ward">
+                                        <option value="">Phường/Xã </option>
+                                        <option value="Phường 1">Phường 1</option>
+                                        <option value="Phường 2">Phường 2</option>
+                                        <option value="Phường 3">Phường 3</option>
+                                        <option value="Phường 4">Phường 4</option>
+                                        <option value="Phường 5">Phường 5</option>
+                                        <option value="Phường 6">Phường 6</option>
+                                        <option value="Phường 7">Phường 7</option>
+                                        <option value="Phường 8">Phường 8</option>
+                                        <option value="Phường 9">Phường 9</option>
+                                        <option value="Phường 10">Phường 10</option>
+                                        <option value="Phường 11">Phường 11</option>
+                                        <option value="Phường 12">Phường 12</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errward"]</p>
+                            <div class="form-label-group">
+                                <div class="page">
+                                    <label class="field field_v1">
+                                        <input class="field__input" name="txtStreet" placeholder="Street">
+                                        <span class="field__label-wrap">
+                                            <span class="field__label">Street</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="text_red">@ViewData["errStreet"]</p>
+                        </div>
+                        <div class="register__formBot">
+                            <div class="row">
+                                <div class="col-6 col-lg-12">
+                                    <input type="submit" class="btn btn_Next" value="Đăng Ký">
+                                </div>
+                                <div class="col-6 col-lg-12">
+                                    <a href="#" class="btn btn_Other">Đăng nhập bằng tài khoản kfc</a>
+                                </div>
+                            </div>
+                            <div class="register__formBot-note">
+                                Đăng nhập bằng tài khoản KFC để nhanh chóng chọn địa chỉ giao hàng đã đăng ký của bạn
+                            </div>
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

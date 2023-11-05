@@ -1,0 +1,303 @@
+﻿
+* {
+    user-select: none;
+}
+
+body {
+    font-family: 'Asap Condensed', sans-serif !important;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 10px;
+    right: 30px;
+    z-index: 80;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    background-color: white;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+    #myBtn:hover {
+        background-color: black;
+    }
+
+#background__page {
+    background-image: url('/Img/bg.jpg');
+    width: 100%;
+}
+
+.wrapper {
+    background-color: whitesmoke;
+    width: 1024px;
+    margin: auto;
+}
+
+
+
+.bg_grey {
+    background-color: gainsboro;
+    color: Black;
+}
+
+.header_account {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+
+.header_account_login:hover > p {
+    color: firebrick;
+    text-shadow: 0 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+.header_account_register:hover > a {
+    color: black;
+    text-shadow: 0 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+.header_account_register {
+    position: relative;
+}
+
+    .header_account_register::after {
+        content: "";
+        width: 2px;
+        height: 14px;
+        background-color: #000;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .header_account_register > a,
+    .header_account_login > p {
+        color: #333;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        cursor: pointer;
+        margin: 0;
+    }
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.footer {
+    background-color: white;
+    padding: 40px;
+}
+
+.mg_top_bot_15 {
+    margin: 15px 0;
+}
+
+.cart_icon {
+    display: block;
+    float: left;
+    width: 100px;
+}
+
+    .cart_icon i {
+        color: black;
+        display: block;
+        float: left;
+        width: 100px;
+    }
+
+
+.css_navbar li i {
+    margin-right: 5px;
+}
+
+.form_doimk {
+    text-align: center;
+    padding: 20px 150px;
+}
+
+.header_find {
+    display: inline-block;
+}
+
+.p-20 {
+    padding: 30px 0;
+}
+
+.kesoc {
+    display: flex;
+    justify-content: center;
+}
+
+.kesoc__item {
+    height: 24px;
+    width: 40px;
+}
+
+.kesoc .kesoc__item:nth-of-type(odd) {
+    background-color: #e4002b;
+}
+
+/*navbar */
+
+.navbar {
+    padding: 0 !important;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position . ref from w3school */
+.sticky {
+    position: fixed !important;
+    top: 0;
+    width: 1024px;
+    margin: auto;
+    z-index: 10;
+    background-color: white;
+    box-shadow: 0px 7px 10px -2px rgb(0 0 0 / 15%);
+}
+
+    /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+    .sticky + .content_wrapper {
+        padding-top: 60px;
+    }
+
+
+.bg_navbar {
+    background-color: #f8f8f8;
+}
+
+.navbar__list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.navbar__list-vertical {
+    flex-direction: column;
+}
+
+.navbar__list-horizon {
+    flex-direction: row;
+}
+
+    .navbar__list-horizon .nav__link {
+        font-size: 16px;
+        color: #333;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 18px;
+        text-decoration: none;
+        display: block;
+        transition: all ease-in-out 0.2s;
+    }
+
+        .navbar__list-horizon .nav__link:hover {
+            background: black;
+            color: white;
+        }
+
+.navbar__deliveryTo {
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+}
+
+.navbar__deliveryTo-title {
+    font-size: 14px;
+    color: rgb(112, 112, 112);
+    line-height: 1.2;
+    margin-right: 10px;
+}
+
+.navbar__deliveryTo-address {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: bold;
+}
+/*navbar bottom*/
+.navbar__list-vertical .nav__link {
+    font-size: 16px;
+    color: rgb(228, 0, 43);
+    font-weight: bold;
+    padding: 8px;
+    padding-left: 24px;
+    display: block;
+    text-decoration: none;
+    transition: all ease-in-out 0.2s;
+}
+
+    .navbar__list-vertical .nav__link:hover {
+        text-decoration: underline;
+    }
+
+
+.card_partial {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    color: #333;
+    font-weight: bold;
+    padding: 5px 20px;
+    text-transform: uppercase;
+}
+
+.card_partial-image {
+    background-image: url('../Image/cart_icon.png');
+    background-repeat: no-repeat;
+    width: 34px;
+    height: 34px;
+    line-height: 30px;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.content {
+    width: 100%;
+}
+
+
+@media screen (min-width:581px) and (max-width:980px) {
+    .header_find {
+        width: 35%;
+    }
+
+    .header_account {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width:580px) {
+    .hide {
+        display: none;
+    }
+}

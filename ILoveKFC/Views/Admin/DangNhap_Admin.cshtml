@@ -1,0 +1,58 @@
+﻿@model ILoveKFC.Models.ACCOUNT_EMPLOYEE
+
+@{
+    ViewBag.Title = "DangNhap_Admin";
+    Layout = null;
+}
+
+
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="~/Asset/css/inputCss.css">
+<link rel="stylesheet" href=~/Asset/css/Admin.css />
+<div style=" background-image: url(https://wallpapercave.com/wp/wp1939512.jpg); height: 100%;">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="fancy-box">
+            <div class="popup"> 
+                <h5 class="mt-4 text-center"><span>Đăng nhập</span></h5>
+                <input type="hidden" name="csrf_site_name" />
+                <div>
+                    <div class="page">
+                        <label class="field field_v1">
+                            <input class="field__input" name="txtUsername" placeholder="Username">
+                            <span class="field__label-wrap">
+                                <span class="field__label">Username</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <div class="page">
+                        <label class="field field_v1">
+                            <input class="field__input" name="txtPassword" placeholder="Password" type="password">
+                            <span class="field__label-wrap">
+                                <span class="field__label">Password</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="info_item">
+                        <input type="checkbox" id="rememberMe" name="remember" class="custom-control-input">
+                        <label class="custom-control-label text-body" for="rememberMe">Ghi nhớ tài khoản</label>
+                    </div>
+                    <div class="info_item">
+                        <a href="#">Quên Mật Khẩu</a>
+                    </div>
+                </div>
+                <div class="form-label-group mt-4 mb-0">
+                    <button type="submit" class="btn btn-danger"><span class="text-uppercase text-white">Đăng nhập</span></button>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

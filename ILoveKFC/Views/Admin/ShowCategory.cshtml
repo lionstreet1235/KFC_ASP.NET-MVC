@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ILoveKFC.Models.CATEGORY>
+
+@{
+    ViewBag.Title = "ShowCategory";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="content_bot_title">
+    <h3>Quản lí Danh Mục Sản Phẩm</h3>
+</div>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <td>Mã Danh Mục</td>
+            <td>Tên Danh Mục</td>
+            <td>Vị Trí</td>
+            <td>Chi Tiết SP</td>
+            <td>Xóa</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            @using (Html.BeginForm("ShowCategory", "Admin"))
+            {
+                @Html.ValidationSummary(true)
+                {
+                    <td><input type="text" class="form-control" name="txtID" placeholder="Mã Danh Mục"></td>
+                    <td><input type="text" class="form-control" name="txtName" placeholder="Tên Danh Mục"></td>
+                    <td>
+                        <select class="form-select" name="txtPosition">
+                            <option value="TOP">Trên</option>
+                            <option value="BOT">Dưới</option>
+                        </select>
+                    </td>
+                    <td colspan="2"><button type="submit" class="btn btn_add"><i class="fas fa-plus-square"></i></button></td>
+
+                }
+            }
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID_CATEGORY</td>
+                <td>@item.NAME_CATEGORY</td>
+                <td>@item.POSITION</td>
+                <td><a href="@Url.Action("ShowProduct", "Admin", new { @madm = item.ID_CATEGORY })" class="btn btn-warning"><i class="fas fa-arrow-right"></i></a></td>
+                <td><a href="@Url.Action("Delete", "Admin", new { @madm = item.ID_CATEGORY })" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+
+        }
+        <tr>
+            <td colspan="5" style="text-align:center;color:brown">@ViewBag.Report</td>
+        </tr>
+    </tbody>
+</table>

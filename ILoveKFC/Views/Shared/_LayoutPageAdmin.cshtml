@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Asap+Condensed&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link href="~/Asset/css/Admin.css" rel="stylesheet" />
+
+
+</head>
+
+<body style=" background-image: url(https://wallpapercave.com/wp/wp1939512.jpg); height: 100%;">
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-3">
+                <div class="border_nav">
+                    <ul class="nav flex-column css_navbar">
+                        <li class="nav-item unset_boderbottom">
+                            <a class="nav-link active img_logo_kfc" aria-current="page" href="#">
+                                <img src="~/Asset/Image/kfc-logo.png" width="150">
+                            </a>
+                        </li>
+                        <li class="nav-item unset_boderbottom">
+                            <a class="nav-link disabled" href="#"><i class="fas fa-list-ul"></i> QUẢN LÝ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="@Url.Action("ShowCategory","Admin")"><i class="fas fa-bookmark"></i> DANH MỤC</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ShowReceipt","Admin")"><i class="fas fa-receipt"></i>HÓA ĐƠN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ShowEmployee","Admin")"><i class="fas fa-user-edit"></i>NHÂN VIÊN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ShowCustomer","Admin")"><i class="fas fa-user"></i>KHÁCH HÀNG</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ShowCodeDiscount","Admin")"><i class="fas fa-barcode"></i>MÃ GIẢM GIÁ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("DangXuat","Admin")"><i class="fas fa-sign-out-alt"></i>ĐĂNG XUẤT</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-9 mg-r-10">
+                <div class="content_top">
+                    <h2 class="h2_css">ADMIN PAGE</h2>
+                </div>
+                <div class="content_bot">
+                    <div>
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+﻿
+/*css cho phần liên quan với sản phẩm */
+
+.product_Title {
+    padding-bottom: 40px;
+}
+
+    .product_Title h3 {
+        color: #000;
+        text-transform: uppercase;
+        font-weight: bolder;
+        font-size: 40px;
+    }
+
+.product__container {
+    padding: 0 8px;
+}
+
+.product {
+    box-shadow: 0px 9px 18px 0px rgb(0 0 0 / 8%);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 44px;
+    min-height: 380px;
+}
+
+.product__photos {
+}
+
+
+.product__image {
+    width: 100%;
+}
+
+/* content*/
+
+.product__content {
+    padding: 18px 14px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product__content-top {
+    display: flex;
+    flex-direction: column;
+}
+
+.product__content-title {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.product__content-price {
+    font-weight: bolder;
+}
+
+.product__content-oldPrice {
+}
+
+
+.product__content-describe {
+    font-size: 16px;
+    color: #707070;
+    line-height: 32px;
+    overflow: hidden;
+    /* text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;*/
+    height: 64px;
+    transition: height .5s;
+}
+
+    .product__content-describe.expand {
+        /* -webkit-line-clamp: unset;*/
+        height: auto;
+    }
+
+.list_describe {
+    padding-left: 20px;
+}
+
+.item_describe {
+    list-style: circle;
+}
+
+
+
+.product__content-bottom {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_item {
+    width: 45%;
+}
+
+.btn_custom {
+    width: 100%;
+}
+
+.product__content-iconDown {
+    height: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.iconUp.visible,
+.iconDown.visible {
+    transform: rotate(540deg);
+}
+
+.iconUp,
+.iconDown {
+    transform: rotate(0deg);
+    transition: all .5s ease;
+}
+
+
+@media (max-width: 800px) {
+    .btn_item {
+        width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+    }
+}
+
+@media screen and (max-width:975px) {
+
+
+    .hide {
+        display: none;
+    }
+}

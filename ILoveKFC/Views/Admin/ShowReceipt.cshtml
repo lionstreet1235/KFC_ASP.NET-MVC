@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ILoveKFC.Models.RECEIPT>
+
+@{
+    ViewBag.Title = "ShowReceipt";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="content_bot_title">
+    <h3>Quản Lí Hóa Đơn</h3>
+</div>
+<table class="table table-sm table-dark">
+    <thead>
+        <tr>
+            <td>Mã Hóa Đơn</td>
+            <td>Mã Khách Hàng</td>
+            <td>Ngày Đặt</td>
+            <td>Ngày Giao</td>
+            <td>Trạng Thái</td>
+            <td>Mã Giảm Giá</td>
+            <td>Tổng Tiền</td>
+            <td>Cập Nhật</td>
+            <td>Xem Chi Tiết</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID_RECEIPT</td>
+                <td>@item.ID_CUSTOMER</td>
+                <td>@item.ORDER_DATE</td>
+                @using (Html.BeginForm("ShowReceipt", "Admin", new { @mahd = item.ID_RECEIPT }))
+                {
+                    @Html.ValidationSummary(true)
+                    {
+                        <td>
+                            @if (item.DELIVERY_DATE != null)
+                            {
+                                @item.DELIVERY_DATE
+                            }
+                            else
+                            {
+
+                                <input type="date" name="txtdate" />
+                            }
+
+                        </td>
+                        <td>
+                            @if (item.STATUS_RECEIPT != null)
+                            {
+                                @item.STATUS_RECEIPT
+                            }
+                            else
+                            {
+                                <select class="form-select" name="txtState">
+                                    <option value="@item.STATUS_RECEIPT">@item.STATUS_RECEIPT</option>
+                                    <option value="Đã Giao">Đã Giao</option>
+                                </select>
+                            }
+                        </td>
+                        <td>@item.CODE_DISCOUNT</td>
+                        <td>@string.Format("{0:0,0}", item.TOTAL)</td>
+                        <td><button type="submit" class="btn btn-warning"><i class="fas fa-pen-square"></i></button></td>
+                        <td><a href="@Url.Action("DetailReceipt", "Admin", new { @mahd = item.ID_RECEIPT,@makh=item.ID_CUSTOMER })" class="btn btn-warning"><i class="fas fa-arrow-right"></i></a></td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+

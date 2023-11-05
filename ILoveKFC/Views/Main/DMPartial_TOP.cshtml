@@ -1,0 +1,36 @@
+﻿@using ILoveKFC.Models
+@model List<CATEGORY>
+<nav class="navbar  bg_navbar" id="navbar">
+    <ul class="navbar__list navbar__list-horizon">
+        @foreach (var item in Model)
+        {
+            <li class="nav__item">
+                <a class="nav__link" href="@Url.Action("ShowProductByCategory","Product",new { @ID_CATEGORY=item.ID_CATEGORY })">@item.NAME_CATEGORY</a>
+            </li>
+        }
+
+    </ul>
+    <div class="navbar__deliveryTo">
+        <span class="navbar__deliveryTo-title">
+            Giao hàng đến :
+        </span>
+
+        @if (Session["User"] != null)
+        {
+            CUSTOMER kh = Session["User"] as CUSTOMER;
+            <span class="navbar__deliveryTo-address">@kh.ADDRESS_CUSTOMER</span>
+            <span class="navbar__deliveryTo-address">, Phường @kh.ADDRESS_WARD</span>
+            <span class="navbar__deliveryTo-address">, Quận @kh.ADDRESS_DISTRICT</span>
+            <span class="navbar__deliveryTo-address">, @kh.ADDRESS_CITY</span>
+        }
+        else
+        {
+            <span class="navbar__deliveryTo-address">Hồ Chí Minh</span>
+        }
+    </div>
+    <div class="navbar__cart">
+
+        @*@Html.Action("CartPartial", "Cart")*@
+    </div>
+</nav>
+

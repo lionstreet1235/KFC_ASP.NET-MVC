@@ -1,0 +1,71 @@
+﻿@model ILoveKFC.Models.CUSTOMER
+
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/_LayoutKFC.cshtml";
+}
+
+<link rel="stylesheet" href="~/Asset/css/inputCss.css">
+<link rel="stylesheet" href="~/Asset/css/dangnhap.css">
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="bg_blur"></div>
+    <div class="fancy-box">
+        <div class="popup">
+            <h5 class="mt-4 text-center"><span>Đăng nhập</span></h5>
+            <form action="" id="frmLogin">
+                <input type="hidden" name="csrf_site_name" />
+                <div>
+                    <div class="page">
+                        <label class="field field_v1">
+                            <input class="field__input" name="txtUsername" placeholder="Username">
+                            <span class="field__label-wrap">
+                                <span class="field__label">Username</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <p class="text_red">@ViewData["errUsername"]</p>
+                <div>
+                    <div class="page">
+                        <label class="field field_v1">
+                            <input class="field__input" name="txtPassword" placeholder="Password" type="password">
+                            <span class="field__label-wrap">
+                                <span class="field__label">Password</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <p class="text_red">@ViewData["errPass"]</p>
+                <div class="info">
+                    <div class="info_item">
+                        <input type="checkbox" id="rememberMe" name="remember" class="custom-control-input">
+                        <label class="custom-control-label text-body" for="rememberMe">Ghi nhớ tài khoản</label>
+                    </div>
+                    <div class="info_item">
+                        <a href="#">Quên Mật Khẩu</a>
+                    </div>
+                </div>
+                <div class="form-label-group mt-4 mb-0">
+                    <button type="submit" class="btn btn-danger"><span class="text-uppercase text-white">Đăng nhập</span></button>
+                </div>
+                <div style="text-align: center;margin:10px 0;">
+                    <span>Hoặc đăng nhập bằng tài khoản mạng xã hội</span>
+                </div>
+                <div class="clearfix login_with_socical m-auto pt-1">
+                    <a href="" class="btn btn-primary btn_nhut "><img src="https://kfcvietnam.com.vn/templates/images/icon_facebook.png" /><span class="text-white">Đăng nhập bằng Facebook</span></a>
+                    <a href="" class="btn btn-light btn_nhut" onclick="login_Google();"><img src="https://kfcvietnam.com.vn/templates/images/icon_google.png" /><span>Đăng nhập bằng Google</span></a>
+                </div>
+                <p class="text-center">
+                    Bạn chưa có tài khoản KFC?
+                    <a href="@Url.Action("DangKy","Main")" class=""><u><strong>Đăng ký ngay</strong></u></a>
+                </p>
+            </form>
+
+        </div>
+    </div>
+}
+
+

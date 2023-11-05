@@ -1,0 +1,103 @@
+﻿
+
+
+
+container__register {
+    padding: 18px 0 30px 0;
+}
+
+
+
+.container_cart {
+    padding: 20px;
+    margin: 0 18px;
+    background-color: white;
+    box-shadow: 0px 0px 18px 0px rgba(0, 0,0,0.06)
+}
+
+.cart_header {
+    text-align: center;
+}
+
+.cart_header_title {
+    font-size: 50px;
+    font-weight: 900;
+}
+
+.cart_header_note {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+    .cart_form_bot_note,
+    .cart_header_note > p {
+        font-size: 14px;
+        color: #707070;
+    }
+
+.cart_form_bot_note {
+    font-size: 12px;
+}
+
+.cart_header_btn {
+    margin: 10px 90px;
+}
+
+.btn_otherLogin {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 32.2rem;
+    margin: 10px 0;
+}
+
+.cart_content {
+    width: 100%;
+    max-width: 32.2rem;
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.cart_form_top {
+    margin-top: 20px;
+    padding: 38px;
+}
+
+.cart_form_title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #000;
+    margin-bottom: 1rem;
+}
+
+.cart_form_select {
+    margin: 15px 0;
+}
+
+.cart_form_bot {
+    padding-top: 20px;
+}
+
+.btn_Other,
+.btn_Next {
+    width: 100%;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    margin: 10px 0;
+}
+
+.btn_Next {
+    color: #fff;
+    background-color: #e4002b;
+}
+
+.btn_Other {
+    border: 1px solid;
+}

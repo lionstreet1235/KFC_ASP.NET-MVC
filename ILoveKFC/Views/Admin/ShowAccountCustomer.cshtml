@@ -1,0 +1,16 @@
+﻿@model ILoveKFC.Models.ACCOUNT_CUSTOMER
+
+@{
+    ViewBag.Title = "ShowAccountCustomer";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+
+<div class="content_bot_title">
+    <h3>Tài Khoản Khách Hàng</h3>
+</div>
+<div class="input-group">
+    <span class="input-group-text">Tài Khoản @ViewBag.Tenkh</span>
+    <input type="text" aria-label="First name" class="form-control" placeholder="@Model.USERNAME_CUSTOMER">
+    <input type="text" aria-label="Last name" class="form-control" placeholder="@Model.PASSWORD_CUSTOMER">
+</div>

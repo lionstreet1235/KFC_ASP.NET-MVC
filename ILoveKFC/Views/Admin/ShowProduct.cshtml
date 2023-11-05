@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ILoveKFC.Models.PRODUCT>
+
+@{
+    ViewBag.Title = "ShowProduct";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="content_bot_title">
+    @if (@ViewBag.title != null)
+    {
+        <h3>Quản lí Sản Phẩm Của Danh Mục @ViewBag.title</h3>
+    }
+    else
+    {
+        <h3>Tất cả sản phẩm</h3>
+
+    }
+</div>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <td>Mã Sản Phẩm</td>
+            <td>Tên Sẩn Phẩm</td>
+            <td>Giá</td>
+            <td>Mô tả</td>
+            <td>Ảnh</td>
+            <td>Xóa</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            @using (Html.BeginForm("ShowProduct", "Admin", new { @madm = ViewBag.madm }))
+            {
+                @Html.ValidationSummary(true)
+                {
+                    <td><input type="text" class="form-control" name="txtID" placeholder="Mã Sản Phẩm"></td>
+                    <td><input type="text" class="form-control" name="txtName" placeholder="Tên Sản Phẩm"></td>
+                    <td><input type="text" class="form-control" name="txtCost" placeholder="Giá"></td>
+                    <td><input type="text" class="form-control" name="txtDescribe" placeholder="Mô tả"></td>
+                    <td>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="inputGroupFile04" name="txtImage" aria-describedby="inputGroupFileAddon04" aria-label="Tải Ảnh lên">
+                        </div>
+                    </td>
+                    <td><button type="submit" class="btn btn_add"><i class="fas fa-plus-square"></i></button></td>
+
+                }
+            }
+        </tr>
+        <tr>
+            <td colspan="7" style="text-align:center;color:brown">@ViewBag.Report</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID_PRODUCT</td>
+                <td>@item.NAME_PRODUCT</td>
+                <td>@string.Format("{0:0,0}", item.COST)</td>
+                <td>
+                    @if (item.DESCRIBE.Length > 20)
+                    {
+                        <p class="card-text" title="@item.DESCRIBE">@item.DESCRIBE.Substring(0, 20)...</p>
+                    }
+                    else
+                    {
+                        <p class="card-text">@item.DESCRIBE</p>
+                    }
+                </td>
+                <td>
+                    <img src="~/Assets/Image/@item.IMAGE_PRODUCT" alt="@item.NAME_PRODUCT" width="50px">
+                </td>
+                @*<td><a href="#" class="btn btn-warning"><i class="fas fa-arrow-right"></i></a></td>*@
+                <td><a href="@Url.Action("DeleteProduct", "Admin", new { @masp = item.ID_PRODUCT })" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+
+

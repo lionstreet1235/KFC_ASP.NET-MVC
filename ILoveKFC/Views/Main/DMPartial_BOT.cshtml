@@ -1,0 +1,14 @@
+﻿@using ILoveKFC.Models
+@model List<CATEGORY>
+<ul class="navbar__list navbar__list-vertical" style="margin-top:20px;">
+
+    <li class="nav__item" style="text-align:center;font-size:18px">
+        <a style="color:#707070;">MENU</a>
+    </li>
+    @foreach (var item in Model)
+    {
+        <li class="nav__item">
+            <a class="nav__link" href="@Url.Action("ShowProductByCategory","Product",new { @ID_CATEGORY=item.ID_CATEGORY })">@item.NAME_CATEGORY</a>
+        </li>
+    }
+</ul>

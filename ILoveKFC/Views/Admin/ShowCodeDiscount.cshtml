@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "ShowCodeDiscount";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="content_bot_title">
+    <h3>Quản lí Mã Giảm Giá</h3>
+</div>
+<table class="table table-sm table-danger">
+    <thead>
+        <tr>
+            <td>Mã Giảm Giá</td>
+            <td>Phần Trăm (%)</td>
+            <td>Giảm Tối Đa
+            <td>Ngày áp dụng</td>
+            <td>Ngày Kết Thúc</td>
+            <td>Số Lượng</td>
+            <td>Sửa</td>
+            <td>Xóa</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            @using (Html.BeginForm("ShowCodeDiscount", "Admin"))
+            {
+                @Html.ValidationSummary(true)
+                {
+                    <td><p class="btn btn-default">Mã Giảm Giá</p></td>
+                    <td><input type="text" class="form-control" name="txtPercent" placeholder="Phần Trăm"></td>
+                    <td><input type="text" class="form-control" name="txtDiscount" placeholder="Tiền giảm"></td>
+                    <td><input type="date" class="form-control" name="txtstart" placeholder="Bắt Đầu"></td>
+                    <td><input type="date" class="form-control" name="txtend" placeholder="Kết Thúc"></td>
+                    <td><input type="number" class="form-control" name="txtQuantity" placeholder="Số Lượng"></td>
+                    <td><button type="submit" class="btn btn_add"><i class="fas fa-plus-square"></i></button></td>
+
+                }
+            }
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CODE_DISCOUNT</td>
+                <td>@item.PERCENT_DISCOUNT</td>
+                <td>@item.MONEY_DISCOUNT</td>
+                <td>@item.START_DAY</td>
+                <td>@item.END_DAY</td>
+                <td>@item.QUANTITY</td>
+                <td><a href="#" class="btn btn-warning"><i class="fas fa-pen-square"></i></a></td>
+                <td><a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+

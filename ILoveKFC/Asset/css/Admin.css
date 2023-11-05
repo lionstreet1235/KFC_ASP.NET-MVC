@@ -1,0 +1,178 @@
+﻿body {
+    font-family: 'Asap Condensed', sans-serif;
+}
+
+.border_nav {
+    margin: 20px 0 20px 150px;
+    padding: 30px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.5); /*Đổ bóng cho menu*/
+    position: fixed; /*Cho menu cố định 1 vị trí với top và left*/
+    height: 630px;
+    width: 250px;
+    top: 0; /*Nằm trên cùng*/
+    left: 0; /*Nằm sát bên trái*/
+    z-index: 100000; /*Hiển thị lớp trên cùng*/
+    background-color: floralwhite;
+}
+
+.content_top {
+    width: 100%;
+    height: 130px;
+    background-color: firebrick;
+    border-radius: 6px;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.5); /*Đổ bóng cho menu*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: blanchedalmond;
+    margin: 0 0 20px 0;
+}
+
+.img_logo_kfc {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.content_bot {
+    height: auto;
+    background-color: floralwhite;
+    padding: 20px;
+}
+
+.content_bot_title {
+    text-align: center;
+    color: black;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 20px 20px 0;
+    border-bottom: 3px solid;
+}
+
+.fancy-box {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    white-space: normal;
+    box-sizing: border-box;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+    .fancy-box.open {
+        display: block;
+    }
+
+
+.popup {
+    background-color: floralwhite;
+    margin: 70px 0;
+    padding: 25px 130px;
+    height: 70%;
+    border-radius: 20px;
+    position: relative;
+    display: inline-block;
+    border: 2px solid;
+}
+
+.ti-close {
+    width: 50px;
+}
+
+
+.form-signin {
+    width: 100%;
+    max-width: 360px;
+    padding: 0;
+    margin: auto;
+}
+
+#frmLogin {
+    /*    margin: 0 150px;*/
+}
+
+.btn-close {
+    float: right;
+    margin: 5px 10px;
+}
+
+h5.text-center {
+    font-size: 38px;
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.text-center {
+    margin: 15px 0 30px 0;
+}
+
+.mt-4 {
+    margin-top: 4px;
+}
+
+.fa-window-close {
+    font-size: 30px;
+}
+
+.icon-down {
+    text-align: center;
+}
+
+    .icon-down a {
+        color: #333;
+    }
+
+.row_btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.info_item a {
+    font-size: small;
+    color: #333;
+}
+/*css btn*/
+
+.btn-danger {
+    width: 100%;
+}
+
+.btn_add {
+    color: #fff;
+    background-color: green;
+    border-color: green;
+    width: 100%;
+}
+
+
+.css_navbar {
+}
+
+    .css_navbar li i {
+        margin-right: 5px;
+    }
+
+    .css_navbar li {
+        border-bottom: 2px solid brown;
+    }
+
+.unset_boderbottom {
+    border-bottom: unset !important;
+}
+
+.css_navbar li a {
+    color: brown;
+}
+
+    .css_navbar li a:hover {
+        background-color: firebrick;
+        color: blanchedalmond;
+    }

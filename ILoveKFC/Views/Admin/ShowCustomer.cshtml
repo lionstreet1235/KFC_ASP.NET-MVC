@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ILoveKFC.Models.CUSTOMER>
+
+@{
+    ViewBag.Title = "ShowCustomer";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="content_bot_title">
+    <h3>Quản Lí Khách Hàng</h3>
+</div>
+<table class="table table-sm table-warning">
+    <thead>
+        <tr>
+            <td>Mã NV</td>
+            <td>Tên NV</td>
+            <td>Ngày Sinh</td>
+            <td>Địa Chỉ</td>
+            <td>SDT</td>
+            <td>Gmail</td>
+            <td>Giới Tính</td>
+            <td>Tài Khoản</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID_CUSTOMER</td>
+                <td>@item.NAME_CUSTOMER</td>
+                <td>@item.DATEOFBIRTH_CUSTOMER</td>
+                <td>@item.ADDRESS_CUSTOMER @item.ADDRESS_WARD @item.ADDRESS_DISTRICT @item.ADDRESS_CITY</td>
+                <td>@item.PHONE_CUSTOMER</td>
+                <td>@item.GMAIL</td>
+                <td>@item.SEX_CUSTOMER</td>
+                <td><a href="@Url.Action("ShowAccountCustomer","Admin",new {@makh=item.ID_CUSTOMER })" class="btn btn-warning"><i class="fas fa-arrow-right"></i></a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+

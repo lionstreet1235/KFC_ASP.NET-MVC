@@ -1,0 +1,142 @@
+﻿
+
+.bg_blur {
+    position: absolute;
+    filter: blur(8px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.fancy-box {
+    position: fixed;
+    display: flex;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.7);
+    visibility: hidden;
+    transition: all ease-in 0.15s;
+    opacity: 0;
+}
+
+    .fancy-box.open {
+        visibility: visible;
+        opacity: 1;
+    }
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.popup {
+    position: relative;
+    background-color: white;
+    padding: 0 120px 0;
+    border-radius: 4px;
+    transition: all ease 3s;
+    height: auto;
+}
+
+.popup__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
+.form-signin {
+    width: 100%;
+    max-width: 360px;
+    padding: 0;
+    margin: auto;
+}
+
+
+h5.text-center {
+    font-size: 38px;
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 20px 20px;
+    /*font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;*/
+}
+
+.text-center {
+    margin: 15px 0 30px 0;
+}
+
+.mt-4 {
+    margin-top: 4px;
+}
+
+.icon-down {
+    text-align: center;
+}
+
+    .icon-down a {
+        color: #333;
+    }
+
+.row_btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.info_item a {
+    font-size: small;
+    color: #333;
+}
+
+.btn-danger {
+    width: 100%;
+}
+
+.btn_nhut {
+    width: 100%;
+}
+
+
+/*toast message*/
+
+.message_loginFail {
+    position: absolute;
+    background-color: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: 30%;
+    border-left: 10px solid firebrick;
+    border-right: 10px solid firebrick;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.5);
+    color: firebrick;
+    padding: 20px 10px;
+    z-index: 4;
+    text-align: center;
+    transition: all ease 0.4s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+    .message_loginFail.visible {
+        top: 30px;
+        visibility: visible;
+        opacity: 1;
+    }

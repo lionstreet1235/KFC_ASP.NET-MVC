@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ILoveKFC.Models.EMPLOYEE>
+
+@{
+    ViewBag.Title = "ShowEmployee";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="content_bot_title">
+    <h3>Quản Lí Nhân Viên</h3>
+</div>
+<table class="table table-sm table-info">
+    <thead>
+        <tr>
+            <td>Mã NV</td>
+            <td>Tên NV</td>
+            <td>Ngày Sinh</td>
+            <td>Địa Chỉ</td>
+            <td>SDT</td>
+            <td>Gmail</td>
+            <td>Giới Tính</td>
+            <td>Sửa</td>
+            <td>Xóa</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @using (Html.BeginForm("ShowEmployee", "Admin"))
+            {
+                @Html.ValidationSummary(true)
+                {
+                    <td><input type="text" class="form-control" name="txtID" placeholder="Mã Nhân Viên"></td>
+                    <td><input type="text" class="form-control" name="txtName" placeholder="Tên Nhân Viên"></td>
+                    <td><input type="date" class="form-control" name="txtDate" placeholder="Ngày Sinh"></td>
+                    <td><input type="text" class="form-control" name="txtAddress" placeholder="Địa Chỉ"></td>
+                    <td><input type="text" class="form-control" name="txtPhone" placeholder="SĐT"></td>
+                    <td><input type="text" class="form-control" name="txtGmail" placeholder="Gmail"></td>
+                    <td>
+                        <select class="form-select" name="txtSex">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                    </td>
+                    <td colspan="2"><button type="submit" class="btn btn_add"><i class="fas fa-plus-square"></i></button></td>
+
+                }
+            }
+        </tr>
+        @if (ViewBag.thongbao != null)
+        {
+            <tr>
+                <td colspan="9" style="text-align:center;color:red">@ViewBag.thongbao</td>
+            </tr>
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID_EMPLOYEE</td>
+                <td>@item.NAME_EMPLOYEE</td>
+                <td>@item.DATEOFBIRTH_EMPLOYEE</td>
+                <td>@item.ADDRESS_EMPLOYEE</td>
+                <td>@item.PHONE_EMPLOYEE</td>
+                <td>@item.GMAIL</td>
+                <td>@item.SEX_EMPLOYEE</td>
+                <td><a href="#" class="btn btn-warning"><i class="fas fa-pen-square"></i></a></td>
+                <td><a href="@Url.Action("DeleteEmployee","Admin",new {@manv =item.ID_EMPLOYEE })" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+

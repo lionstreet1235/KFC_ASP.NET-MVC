@@ -1,0 +1,30 @@
+﻿@using ILoveKFC.Models
+@model List<CATEGORY>
+@if (Session["User"] != null)
+{
+    var kh = Session["User"] as CUSTOMER;
+    <a href="@Url.Action("Cart", "Cart")" class="card_partial">
+        <div class="card_partial-image">
+            @ViewBag.TongSL
+        </div>
+        @if (@ViewBag.TongSL > 0)
+        {
+            <span>
+                @ViewBag.tongThanhTien
+            </span>
+        }
+        else
+        {
+            <span>Giỏ Hàng</span>
+        }
+    </a>
+}
+else
+{
+    <a href="@Url.Action("DangKy","Main")" class="card_partial">
+        <div class="card_partial-image">
+            0
+        </div>
+        Giỏ Hàng
+    </a>
+}
