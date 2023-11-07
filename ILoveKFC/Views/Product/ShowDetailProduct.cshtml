@@ -1,0 +1,27 @@
+﻿@model ILoveKFC.Models.PRODUCT
+
+@{
+    ViewBag.Title = "ShowDetailProduct";
+    Layout = "~/Views/Shared/_LayoutKFC.cshtml";
+}
+
+<link href="~/Asset/css/item.css" rel="stylesheet" />
+<div class="sp_title">
+    <h3>Thông Tin Chi Tiết @ViewBag.tensp</h3>
+</div>
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-5">
+            <img src="~/Asset/Image/@Model.IMAGE_PRODUCT" class="img-fluid rounded-start">
+        </div>
+        <div class="col-md-7">
+            <div class="card-body">
+                <h5 class="card-title">@Model.NAME_PRODUCT</h5>
+                <p class="card-text">@Model.DESCRIBE</p>
+                <h5 class="card-title text-danger">@string.Format("{0:0,0}", Model.COST)Đ</h5>
+                <a href="@Url.Action("AddCart","Cart",new {@masp=Model.ID_PRODUCT,@sl=1, @url=Request.Url.ToString()})" class="btn btn_add ">Đặt hàng</a>
+            </div>
+
+        </div>
+    </div>
+</div>

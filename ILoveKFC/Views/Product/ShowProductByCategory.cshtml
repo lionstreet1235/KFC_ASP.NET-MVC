@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ILoveKFC.Models.PRODUCT>
+
+@{
+    ViewBag.Title = "ShowProductByCategory";
+    Layout = "~/Views/Shared/_LayoutKFC.cshtml";
+}
+
+<div class="product_Title">
+    <h3>@ViewBag.tenDM</h3>
+</div>
+<div class="row row__edit">
+    @foreach (var item in Model)
+    {
+        <div class="col-6 col-lg-4">
+            <div class="product__container">
+                <div class="product">
+                    <div class="product__photos">
+                        <a href="#">
+                            <img src="~/Asset/Image/@item.IMAGE_PRODUCT" class="product__image" alt="@item.NAME_PRODUCT">
+                        </a>
+                    </div>
+                    <div class="product__content">
+                        <div class="product__content-top">
+                            <h5 class="product__content-title">@item.NAME_PRODUCT</h5>
+                            <h6 class="product__content-price">@string.Format("{0:0,0}", item.COST)Đ</h6>
+                            <span class="product__content-describe" title="@item.DESCRIBE">
+                                <ul class="list_describe">
+                                    @{
+                                        string[] arrDes = @item.DESCRIBE.Split('/');
+                                    }
+                                    @foreach (string s in arrDes)
+                                    {
+                                        <li class="item_describe">@s</li>
+                                    }
+
+                                </ul>
+                            </span>
+                            <div class="product__content-iconDown">
+                                @{
+                                    if (arrDes.Length > 2)
+                                    {
+                                        <i class="iconDown fa-solid fa-chevron-down"></i>
+                                        @*<i class="iconUp fa-solid fa-chevron-up"></i>*@
+                                    }
+                                    else
+                                    {
+                                        <i class="iconDown"></i>
+                                    }
+                                }
+                            </div>
+
+                        </div>
+                        <div class="product__content-bottom">
+                            <div class="btn_item">
+                                <a href="@Url.Action("ShowDetailProduct", "Product", new { @masp = item.ID_PRODUCT })" class="btn btn_custom ">Chi Tiết</a>
+                            </div>
+                            <div class="btn_item">
+                                @{
+                                    if (Session["User"] == null)
+                                    {
+                                        <a href="@Url.Action("DangKy","Main")" class="btn btn_add ">Đặt hàng</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("AddCart","Cart",new {@masp=item.ID_PRODUCT,@sl=1, @url=Request.Url.ToString()})" class="btn btn_add ">Đặt hàng</a>
+
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+@* html để js get data *@
+
+<div data-state="@TempData["stateLogin"]" id="stateLogin" class="message_loginFail">
+    @TempData["messageError"]
+</div>
+
+

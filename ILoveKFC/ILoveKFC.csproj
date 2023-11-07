@@ -383,6 +383,9 @@
     <Content Include="Views\Main\DangNhap.cshtml" />
     <Content Include="System.Data.Linq" />
     <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Product\ShowProductByCategory.cshtml" />
+    <Content Include="Views\Product\ShowDetailProduct.cshtml" />
+    <Content Include="Views\Cart\Cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
