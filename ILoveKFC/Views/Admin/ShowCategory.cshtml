@@ -45,7 +45,7 @@
                 <td>@item.NAME_CATEGORY</td>
                 <td>@item.POSITION</td>
                 <td><a href="@Url.Action("ShowProduct", "Admin", new { @madm = item.ID_CATEGORY })" class="btn btn-warning"><i class="fas fa-arrow-right"></i></a></td>
-                <td><a href="@Url.Action("Delete", "Admin", new { @madm = item.ID_CATEGORY })" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a href="@Url.Action("DeleteCate", "Admin", new { @madm = item.ID_CATEGORY })" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
             </tr>
 
         }

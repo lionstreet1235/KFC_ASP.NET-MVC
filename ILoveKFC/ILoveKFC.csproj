@@ -147,10 +147,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -290,8 +290,13 @@
     <Content Include="Asset\Image\077.jpg" />
     <Content Include="Asset\Image\078.jpg" />
     <Content Include="Asset\Image\079.png" />
+    <Content Include="Asset\Image\BTLD.png" />
     <Content Include="Asset\Image\cart_icon.png" />
+    <Content Include="Asset\Image\combo-dinner.png" />
+    <Content Include="Asset\Image\EmptyCart.jpg" />
+    <Content Include="Asset\Image\GaQueKem.png" />
     <Content Include="Asset\Image\kfc-logo.png" />
+    <Content Include="Asset\Image\KFC50.png" />
     <Content Include="Asset\Image\logo_pc.png" />
     <Content Include="Asset\Image\wp1939512-kfc-wallpapers.jpg" />
     <Content Include="Asset\JS\index.js" />
@@ -378,14 +383,18 @@
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Main\DMPartial_TOP.cshtml" />
     <Content Include="Views\Main\DMPartial_BOT.cshtml" />
-    <Content Include="Views\Cart\CartPartial.cshtml" />
     <Content Include="Views\Main\DangKy.cshtml" />
     <Content Include="Views\Main\DangNhap.cshtml" />
     <Content Include="System.Data.Linq" />
-    <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Product\ShowProductByCategory.cshtml" />
     <Content Include="Views\Product\ShowDetailProduct.cshtml" />
-    <Content Include="Views\Cart\Cart.cshtml" />
+    <Content Include="Views\ShoppingCart\BagCart.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut_Success.cshtml" />
+    <Content Include="Views\ShoppingCart\EmptyCart.cshtml" />
+    <Content Include="Views\ShoppingCart\ShowCart.cshtml" />
+    <Content Include="Views\Shared\_LayoutCart.cshtml" />
+    <Content Include="Views\Main\DoiMatKhau.cshtml" />
+    <Content Include="Views\Admin\OrderStatistics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,61 @@
+﻿
+
+
+<!DOCTYPE html>
+@{
+    ViewBag.Title = "Mua hàng thành công";
+    Layout = null;
+}
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #fff;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            color: #565656;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .home-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #565656;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: all .42s ease;
+        }
+
+            .home-link:hover {
+                background-color: #ff0000;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Đặt hàng thành công!</h2>
+        <p>Cảm ơn bạn đã mua hàng. Đơn đặt hàng của bạn đã được xác nhận.</p>
+        <a href="~/Views/Product/ShowAllProduct.cshtml" class="home-link">Quay về trang chủ</a>
+    </div>
+</body>
+</html>
+
+

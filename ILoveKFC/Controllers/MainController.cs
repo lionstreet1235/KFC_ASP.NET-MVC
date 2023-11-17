@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ILoveKFC.Controllers
@@ -56,16 +55,16 @@ namespace ILoveKFC.Controllers
                     List<CART> list_giohang = db.CARTs.Where(t => t.ID_CUSTOMER == kh.ID_CUSTOMER).ToList();
                     if (list_giohang != null)
                     {
-                        ////khoi tao gio hang tren session
-                        //List<Cart> list = new List<Cart>();
-                        ////do gio hang db -> giohang session
-                        //foreach (CART item in list_giohang)
-                        //{
-                        //    Cart hang = new Cart(item);
-                        //    list.Add(hang);
-                        //}
-                        ////
-                        //Session["cart"] = list;
+                        //khoi tao gio hang tren session
+                        List<Cart1> list = new List<Cart1>();
+                        //do gio hang db -> giohang session
+                        foreach (CART item in list_giohang)
+                        {
+                            Cart1 hang = new Cart1();
+                            list.Add(hang);
+                        }
+                        //
+                        Session["cart"] = list;
                     }
                     TempData["stateLogin"] = 1;
                     return RedirectToAction("ShowProductByCategory", "Product");
@@ -158,9 +157,9 @@ namespace ILoveKFC.Controllers
                     new_kh.PHONE_CUSTOMER = phone;
                     new_kh.GMAIL = email;
                     new_kh.SEX_CUSTOMER = null;
-                    //db.ACCOUNT_CUSTOMER.InsertOnSubmit(new_tk); hỏi cô
-                    //db.CUSTOMERs.InsertOnSubmit(new_kh);
-                    //db.SubmitChanges();
+                    db.ACCOUNT_CUSTOMER.Add(new_tk); 
+                    db.CUSTOMERs.Add(new_kh);
+                    db.SaveChanges();
                     return RedirectToAction("DangNhap", "Main");
 
                 }

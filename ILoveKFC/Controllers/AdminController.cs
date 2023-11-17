@@ -2,10 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Data.Linq;
-using System.Data.Entity;
 
 
 namespace ILoveKFC.Controllers
@@ -71,8 +68,8 @@ namespace ILoveKFC.Controllers
                     danhmuc.ID_CATEGORY = id;
                     danhmuc.NAME_CATEGORY = name;
                     danhmuc.POSITION = pos;
-                    //db.CATEGORies.InsertOnSubmit(danhmuc);
-                    //db.SubmitChanges();
+                    db.CATEGORies.Add(danhmuc);
+                    db.SaveChanges();
                 }
             }
             return RedirectToAction("ShowCategory", "Admin");
@@ -83,8 +80,8 @@ namespace ILoveKFC.Controllers
             CATEGORY del = db.CATEGORies.SingleOrDefault(t => t.ID_CATEGORY == madm);
             if (del != null)
             {
-                //db.CATEGORies.DeleteOnSubmit(del);
-                //db.SubmitChanges();
+                db.CATEGORies.Remove(del);
+                db.SaveChanges();
 
             }
             return RedirectToAction("ShowCategory", "Admin");
@@ -124,9 +121,8 @@ namespace ILoveKFC.Controllers
                 sp.COST = Convert.ToInt32(gia);
                 sp.DESCRIBE = mota;
                 sp.IMAGE_PRODUCT = anh;
-                //db.PRODUCTs.InsertOnSubmit(sp);
-                //db.SubmitChanges();
-
+                db.PRODUCTs.Add(sp);
+                db.SaveChanges();
                 Response.Write("<script>alert('Thêm Sản phẩm thành công !!!')</script>");
             }
             List<PRODUCT> list_pro = db.PRODUCTs.Where(t => t.ID_CATEGORY == madm).ToList();
@@ -147,44 +143,19 @@ namespace ILoveKFC.Controllers
             return View();
         }
 
-        //public ActionResult DeleteProduct(string masp)
-        //{
-        //    PRODUCT del = db.PRODUCTs.SingleOrDefault(t => t.ID_PRODUCT == masp);
-        //    var madm = del.ID_CATEGORY;
-        //    if (del != null)
-        //    {
-        //        //db.PRODUCTs.DeleteOnSubmit(del);
-        //        //db.SubmitChanges();
-        //    }
-        //    return RedirectToAction("ShowProduct", "Admin", new { @madm = madm });
-        //}
-        //hoa don
-        [HttpPost]
-        public ActionResult Edit(int id, CATEGORY cate)
+        public ActionResult DeleteProduct(string masp)
         {
-            db.Entry(cate).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        public ActionResult Delete(string id)
-        {
-            return View(db.CATEGORies.Where(s => s.ID_CATEGORY == id).FirstOrDefault());
-        }
-        [HttpPost]
-        public ActionResult Delete(string id, CATEGORY cate)
-        {
-            try
+            PRODUCT del = db.PRODUCTs.SingleOrDefault(t => t.ID_PRODUCT == masp);
+            var madm = del.ID_CATEGORY;
+            if (del != null)
             {
-                cate = db.CATEGORies.Where(s => s.ID_CATEGORY == id).FirstOrDefault();
-                db.CATEGORies.Remove(cate);
+                db.PRODUCTs.Remove(del);
                 db.SaveChanges();
-                return RedirectToAction("ShowCategory", "Admin");
             }
-            catch
-            {
-                return Content("This data is using in other table, Error Delete!");
-            }
+            return RedirectToAction("ShowProduct", "Admin", new { @madm = madm });
         }
+        //hoa don
+       
         [HttpGet]
         public ActionResult ShowReceipt()
         {
@@ -203,7 +174,7 @@ namespace ILoveKFC.Controllers
                 RECEIPT hoadon = db.RECEIPTs.SingleOrDefault(t => t.ID_RECEIPT == mahd);//lấy ra đối tượng cần sửa
                 hoadon.DELIVERY_DATE = Convert.ToDateTime(date);//gán lại cho những thuộc tính cần sửa
                 hoadon.STATUS_RECEIPT = state;
-                //db.SubmitChanges(); ;//lưu
+                db.SaveChanges(); ;//lưu
 
             }
             List<RECEIPT> list = db.RECEIPTs.Where(t => t.ID_RECEIPT != null).ToList();
@@ -256,8 +227,8 @@ namespace ILoveKFC.Controllers
                     nv.PHONE_EMPLOYEE = sdt;
                     nv.GMAIL = mail;
                     nv.SEX_EMPLOYEE = gioitinh;
-                    //db.EMPLOYEEs.InsertOnSubmit(nv);
-                    //db.SubmitChanges();
+                    db.EMPLOYEEs.Add(nv);
+                    db.SaveChanges();
 
                 }
             }
@@ -270,8 +241,8 @@ namespace ILoveKFC.Controllers
             EMPLOYEE del = db.EMPLOYEEs.SingleOrDefault(t => t.ID_EMPLOYEE == manv);//lấy ra đối tượng cần xóa
             if (del != null)
             {
-                //db.EMPLOYEEs.DeleteOnSubmit(del);//xóa
-                //db.SubmitChanges();//lưu thay đổi
+                db.EMPLOYEEs.Remove(del);//xóa
+                db.SaveChanges();//lưu thay đổi
             }
             return RedirectToAction("ShowEmployee", "Admin");
         }
@@ -324,13 +295,24 @@ namespace ILoveKFC.Controllers
                 giamgia.START_DAY = Convert.ToDateTime(start);
                 giamgia.END_DAY = Convert.ToDateTime(end);
                 giamgia.QUANTITY = Convert.ToInt32(quantity);
-                //db.DISCOUNTs.InsertOnSubmit(giamgia);
-                //db.SubmitChanges();
+                db.DISCOUNTs.Add(giamgia);
+                db.SaveChanges();
             }
 
 
             List<DISCOUNT> list = db.DISCOUNTs.OrderBy(t => t.END_DAY).ToList();
             return View(list);
+        }
+        public ActionResult OrderStatistics()
+        {
+            // Lấy số lượng đơn hàng từ cơ sở dữ liệu
+            var totalOrders = db.RECEIPTs.Count();
+
+            // Truyền số lượng đơn hàng sang view để hiển thị
+            ViewBag.TotalOrders = totalOrders;
+
+            // Trả về view để hiển thị thông tin thống kê
+            return View();
         }
 
         public ActionResult DangXuat()

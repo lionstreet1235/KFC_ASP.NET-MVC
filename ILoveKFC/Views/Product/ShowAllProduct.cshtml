@@ -29,7 +29,7 @@
                         @if (item.DESCRIBE.Length > 40)
                         {
                             <p class="card-text" title="@item.DESCRIBE">@item.DESCRIBE.Substring(0, 40)...</p>
-                        }
+                        } 
                         else
                         {
                             <p class="card-text">@item.DESCRIBE</p>
@@ -43,7 +43,7 @@
                             <a href="@Url.Action("ShowDetailProduct", "Product", new { @masp = item.ID_PRODUCT })" class="btn btn_custom ">Chi Tiết</a>
                         </div>
                         <div class="row_btn_item">
-                            <a href="@Url.Action("AddCart","Cart",new {@masp=item.ID_PRODUCT,@sl=1, @url=Request.Url.ToString()})" class="btn btn_add ">Đặt hàng</a>
+                            <a href="/ShoppingCart/AddToCart/@item.ID_PRODUCT" class="btn btn_add">Đặt hàng</a>
                         </div>
 
                     </div>

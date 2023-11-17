@@ -19,7 +19,8 @@
                 <h5 class="card-title">@Model.NAME_PRODUCT</h5>
                 <p class="card-text">@Model.DESCRIBE</p>
                 <h5 class="card-title text-danger">@string.Format("{0:0,0}", Model.COST)Đ</h5>
-                <a href="@Url.Action("AddCart","Cart",new {@masp=Model.ID_PRODUCT,@sl=1, @url=Request.Url.ToString()})" class="btn btn_add ">Đặt hàng</a>
+                @foreach (var item in Model)
+                    <a href="/ShoppingCart/AddToCart/@item.ID_PRODUCT" class="btn btn_add">Đặt hàng</a>
             </div>
 
         </div>

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="73b3bbe6ed25426dbe2584d50cc03ec6" Name="Diagram1">
+      <Diagram DiagramId="73b3bbe6ed25426dbe2584d50cc03ec6" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="QL_KFCModel.ACCOUNT_CUSTOMER" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_KFCModel.ACCOUNT_EMPLOYEE" Width="1.5" PointX="11" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_KFCModel.CART" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />

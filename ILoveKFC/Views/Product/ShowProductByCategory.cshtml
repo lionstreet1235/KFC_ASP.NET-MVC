@@ -58,11 +58,11 @@
                                 @{
                                     if (Session["User"] == null)
                                     {
-                                        <a href="@Url.Action("DangKy","Main")" class="btn btn_add ">Đặt hàng</a>
+                                        <a href="@Url.Action("DangKy", "Main")" class="btn btn_add ">Đặt hàng</a>
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("AddCart","Cart",new {@masp=item.ID_PRODUCT,@sl=1, @url=Request.Url.ToString()})" class="btn btn_add ">Đặt hàng</a>
+                                        <a href="/ShoppingCart/AddToCart/@item.ID_PRODUCT" class="btn btn_add">Đặt hàng</a>
 
                                     }
                                 }

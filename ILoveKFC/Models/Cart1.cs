@@ -5,49 +5,58 @@ using System.Web;
 
 namespace ILoveKFC.Models
 {
+    public class CartItem
+    {
+        public PRODUCT _product {  get; set; }
+        public int _quantity { get; set; }
+    }
     public class Cart1
     {
-        QL_KFCEntities db = new QL_KFCEntities();
-        public string sMasp { get; set; }
-        public string sTensp { get; set; }
-        public string sAnh { get; set; }
-        public int dGia { get; set; }
-        public int iSoLuong { get; set; }
-        public string sDescribe { get; set; }
-        public int dThanhTien
+        List<CartItem> _items = new List<CartItem>();
+        public IEnumerable<CartItem> Items
         {
-            get { return iSoLuong * dGia; }
+            get { return _items; }
         }
-        public Cart1(CART giohang)
+        public void Add_Product_Cart(PRODUCT _pro, int _quan=1)
         {
-            sMasp = giohang.ID_PRODUCT;
-            sTensp = giohang.NAME_PRODUCT;
-            sAnh = giohang.IMAGE_PRODUCT;
-            dGia = Convert.ToInt32(giohang.COST);
-            sDescribe = giohang.DESCRIBE;
-            iSoLuong = Convert.ToInt32(giohang.QUANTITY_PRODUCT);
+            var item= Items.FirstOrDefault(s=>s._product.ID_PRODUCT==_pro.ID_PRODUCT);
+            if(item==null)
+            {
+                _items.Add(new CartItem
+                {
+                    _product = _pro,
+                    _quantity = _quan,
+                });
+            }
+            else
+            {
+                item._quantity += _quan;
+            }
         }
-
-        public Cart1(string masp)
+        public int Total_quantity()
         {
-            sMasp = masp;
-            PRODUCT sp = db.PRODUCTs.Single(t => t.ID_PRODUCT == masp);
-            sTensp = sp.NAME_PRODUCT;
-            sAnh = sp.IMAGE_PRODUCT;
-            sDescribe = sp.DESCRIBE;
-            dGia = Convert.ToInt32(sp.COST);
-            iSoLuong = 1;
+            return _items.Sum(s=>s._quantity );
         }
-
-        public Cart1(string masp, int sl)
+        public decimal Total_money()
         {
-            sMasp = masp;
-            PRODUCT sp = db.PRODUCTs.Single(t => t.ID_PRODUCT == masp);
-            sTensp = sp.NAME_PRODUCT;
-            sAnh = sp.IMAGE_PRODUCT;
-            sDescribe = sp.DESCRIBE;
-            dGia = Convert.ToInt32(sp.COST);
-            iSoLuong = sl;
+            var total = Items.Sum(s=>s._quantity+s._product.COST);
+            return (decimal)total;
+        }
+        public void Update_quantity(string id, int _new_quan)
+        {
+             var item = _items.Find(s => s._product.ID_PRODUCT == id);
+            if(item!=null)
+            {
+                item._quantity = _new_quan;
+            }
+        }
+        public void Remove_CartItem(string id)
+        {
+            _items.RemoveAll(s => s._product.ID_PRODUCT == id);
+        }
+        public void ClearCart()
+        {
+            _items.Clear();
         }
     }
 }

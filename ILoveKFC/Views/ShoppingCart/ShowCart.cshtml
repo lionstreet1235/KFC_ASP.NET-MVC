@@ -1,0 +1,241 @@
+﻿@model ILoveKFC.Models.Cart1
+
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/_LayoutCart.cshtml";
+}
+
+<style>
+    .cart {
+        width: 80%;
+        margin: 200px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .continue-shopping {
+        text-decoration: none;
+        padding: 5px 10px;
+        background-color: #565656;
+        color: white;
+        border-radius: 3px;
+        transition: background-color 0.3s;
+    }
+
+        .continue-shopping:hover {
+            background-color: #ff0000;
+        }
+
+    .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .cart-table th, .cart-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-table th {
+            background-color: #565656;
+            color: #fff;
+        }
+
+        .cart-table tr {
+            transition: background-color 0.3s;
+        }
+
+            .cart-table tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            .cart-table tr:hover {
+                background-color: #d9d9d9;
+            }
+
+    .product-image img {
+        max-width: 100px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .product-quantity input[type="number"] {
+        width: 40px;
+        padding: 3px;
+        text-align: center;
+    }
+
+    .product-quantity input[type="submit"] {
+        padding: 5px 10px;
+        background-color: #0099cc;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .product-quantity input[type="submit"]:hover {
+            background-color: #0077aa;
+        }
+
+    .product-total, .total-amount {
+        font-weight: bold;
+    }
+
+    .remove-item {
+        text-decoration: none;
+        color: #ff0000;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        .remove-item:hover {
+            text-decoration: underline;
+        }
+
+    .checkout-form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+    }
+
+    input[type="number"],
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-right: 10px;
+        text-decoration: none;
+        background-color: #565656;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        transition: all .42s ease;
+    }
+
+        .btn:hover {
+            background-color: #ff0000;
+        }
+
+        .btn.btn-success {
+            background-color: #565656;
+        }
+
+            .btn.btn-success:hover {
+                background-color: #ff0000;
+            }
+</style>
+<section class="cart">
+    <div class="cart-header">
+        <h2>Giỏ hàng</h2>
+        <a href="@Url.Action("ShowAllProduct", "Product")" class="continue-shopping" style="color:white;">Tiếp tục mua hàng</a>
+    </div>
+    <br />
+    @if (Model != null && Model.Items.Any())
+    {
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th class="product-name">Tên sản phẩm</th>
+                    <th class="product-image">Hình sản phẩm</th>
+                    <th class="product-price">Giá</th>
+                    <th class="product-quantity">Số lượng</th>
+                    <th class="product-total">Thành tiền</th>
+                    <th class="product-remove"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    decimal total = item._quantity * (decimal)item._product.COST.Value;
+                    <tr>
+                        <td>@Html.DisplayFor(model => item._product.NAME_PRODUCT)</td>
+                        <td>
+                            <img src="@Url.Content(item._product.IMAGE_PRODUCT)" alt="Hình sản phẩm" width="100" />
+                        </td>
+                        <td style="color:red;">@Html.DisplayFor(model => item._product.COST)0 vnđ</td>
+                        <td>
+                            @using (Html.BeginForm("Update_Cart_Quantity", "ShoppingCart"))
+                            {
+                                <input type="hidden" value="@item._product.ID_PRODUCT" name="idPro" />
+                                <input type="number" value="@item._quantity" name="cartQuantity" />
+                                <input type="submit" value="Cập nhật" class="btn btn-success" />
+                            }
+                        </td>
+                        <td style="color:red;">@total vnđ</td>
+                        <td>
+                            <a href="/ShoppingCart/RemoveCart/@item._product.ID_PRODUCT" class="remove-item" style="color:black">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="total-amount" colspan="5">Tổng tiền:</td>
+                    <td style="color:red;">@Model.Total_money() vnđ</td>
+                </tr>
+            </tfoot>
+        </table>
+    }
+    else
+    {
+        <div class="cart__wrapper">
+            <h1 class="cart__title cart__title-none">
+                GIỎ HÀNG CỦA BẠN
+            </h1>
+            <div class="cart__content">
+                <img src="~/Asset/Image/EmptyCart.jpg" class="cart__content-image" />
+                <p class="cart__content-message">
+                    Giỏ của bạn trống?
+                </p>
+                <p class="cart__content-message">Đặt hàng để thưởng thức công thức đặc biệt của KFC.</p>
+                <a href="@Url.Action("ShowProductByCategory","Product")" class="btn btn__OrderNow">Đặt Hàng Ngay</a>
+            </div>
+        </div>
+    }
+    <div class="checkout-form">
+        <form method="post" action="@Url.Action("Checkout", "ShoppingCart")">
+            
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Thanh toán</button>
+                <a href="@Url.Action("DangKy", "Main")" class="btn btn-success">Đăng ký</a>
+            </div>
+        </form>
+    </div>
+</section>
+

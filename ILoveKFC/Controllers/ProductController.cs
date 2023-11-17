@@ -1,15 +1,13 @@
 ﻿using ILoveKFC.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ILoveKFC.Controllers
 {
     public class ProductController : Controller
     {
-        QL_KFCEntities kfc=new QL_KFCEntities();    
+        QL_KFCEntities kfc = new QL_KFCEntities();
         // GET: Product
         public ActionResult Index()
         {

@@ -1,0 +1,49 @@
+﻿@model ILoveKFC.Models.ACCOUNT_CUSTOMER
+
+@{
+    ViewBag.Title = "DoiMatKhau";
+    Layout = "~/Views/Shared/_LayoutKFC.cshtml";
+}
+
+<div class="form_doimk">
+    <h2 style="text-align:center"><i class="fas fa-sync"></i> Đổi Mật Khẩu</h2>
+    @using (Html.BeginForm("DoiMatKhau", "Main", new { @makh = Model.ID_CUSTOMER }))
+    {
+
+
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4 col-sm-12">
+
+                <div>
+                    <label for="validationCustom01" class="form-label">Tên Đăng Nhập :</label>
+                    <input type="text" class="form-control " id="validationCustom01" readonly value="@Model.USERNAME_CUSTOMER" required>
+                    <div class="valid-feedback">
+                        OK!
+                    </div>
+                </div>
+                <div>
+                    <label for="validationCustom01" class="form-label">Mật Khẩu</label>
+                    <input type="password" class="form-control" id="validationCustom01" value="Mark" required name="txtpass">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div>
+                    <label for="validationCustomUsername" class="form-label">Mật Khẩu Mới</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend"></span>
+                        <input type="password" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required name="txtRepass">
+                        <div class="invalid-feedback">
+                            Không Dc Bỏ trống
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <h3>@ViewBag.thongbao</h3>
+            </div>
+            <div class="col-lg-4"></div>
+
+        </div>
+    }
+</div>
