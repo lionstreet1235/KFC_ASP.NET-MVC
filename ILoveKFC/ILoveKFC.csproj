@@ -297,6 +297,7 @@
     <Content Include="Asset\Image\GaQueKem.png" />
     <Content Include="Asset\Image\kfc-logo.png" />
     <Content Include="Asset\Image\KFC50.png" />
+    <Content Include="Asset\Image\KfcCart.png" />
     <Content Include="Asset\Image\logo_pc.png" />
     <Content Include="Asset\Image\wp1939512-kfc-wallpapers.jpg" />
     <Content Include="Asset\JS\index.js" />
@@ -319,6 +320,26 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Img\1.png" />
+    <Content Include="Img\2.png" />
+    <Content Include="Img\3.png" />
+    <Content Include="Img\4.png" />
+    <Content Include="Img\bg.jpg" />
+    <Content Include="Img\EnglishFlag.JPG" />
+    <Content Include="Img\footer1.png" />
+    <Content Include="Img\footer2.png" />
+    <Content Include="Img\footerNew.png" />
+    <Content Include="Img\giohang.jpg" />
+    <Content Include="Img\HEADER.jpg" />
+    <Content Include="Img\icon_fb_red.svg" />
+    <Content Include="Img\icon_ins_red.svg" />
+    <Content Include="Img\icon_yt_red.svg" />
+    <Content Include="Img\imgSearch.png" />
+    <Content Include="Img\logokfc.png" />
+    <Content Include="Img\logo_boct.png" />
+    <Content Include="Img\logo_footer_vi.png" />
+    <Content Include="Img\tuongkfc.jpg" />
+    <Content Include="Img\VietNamFlag.JPG" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -395,6 +416,7 @@
     <Content Include="Views\Shared\_LayoutCart.cshtml" />
     <Content Include="Views\Main\DoiMatKhau.cshtml" />
     <Content Include="Views\Admin\OrderStatistics.cshtml" />
+    <Content Include="Views\Admin\TopSellingProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

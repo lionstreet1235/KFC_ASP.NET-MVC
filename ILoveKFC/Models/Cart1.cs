@@ -39,7 +39,7 @@ namespace ILoveKFC.Models
         }
         public decimal Total_money()
         {
-            var total = Items.Sum(s=>s._quantity+s._product.COST);
+            var total = _items.Sum(s => s._quantity * s._product.COST); // Nhân số lượng với giá của mỗi sản phẩm và sau đó tính tổng
             return (decimal)total;
         }
         public void Update_quantity(string id, int _new_quan)
@@ -50,9 +50,19 @@ namespace ILoveKFC.Models
                 item._quantity = _new_quan;
             }
         }
-        public void Remove_CartItem(string id)
+        public void RemoveProduct(string productId)
         {
-            _items.RemoveAll(s => s._product.ID_PRODUCT == id);
+            CartItem itemToRemove = _items.Find(item => item._product.ID_PRODUCT == productId);
+
+            if (itemToRemove != null)
+            {
+                _items.Remove(itemToRemove);
+            }
+            else
+            {
+                Console.WriteLine("Không tìm thấy sản phẩm trong giỏ hàng");
+                // Xử lý khi không tìm thấy sản phẩm trong giỏ hàng (có thể thông báo lỗi)
+            }
         }
         public void ClearCart()
         {

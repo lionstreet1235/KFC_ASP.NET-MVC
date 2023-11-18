@@ -183,6 +183,7 @@
                 @foreach (var item in Model.Items)
                 {
                     decimal total = item._quantity * (decimal)item._product.COST.Value;
+
                     <tr>
                         <td>@Html.DisplayFor(model => item._product.NAME_PRODUCT)</td>
                         <td>
@@ -199,7 +200,7 @@
                         </td>
                         <td style="color:red;">@total vnđ</td>
                         <td>
-                            <a href="/ShoppingCart/RemoveCart/@item._product.ID_PRODUCT" class="remove-item" style="color:black">Xóa</a>
+                        <a href="@Url.Action("RemoveFromCart", "ShoppingCart", new { productId = item._product.ID_PRODUCT })" class="remove-item" style="color: black">Xóa</a>
                         </td>
                     </tr>
                 }

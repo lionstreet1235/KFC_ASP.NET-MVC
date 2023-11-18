@@ -39,20 +39,28 @@ namespace ILoveKFC.Controllers
             {
                 GetCart().Add_Product_Cart(_pro);
             }
-            return RedirectToAction("ShowCart", "ShoppingCart");
+            return RedirectToAction("ShowProductByCategory", "Product");
         }
         public ActionResult Update_Cart_Quantity(FormCollection form)
         {
             Cart1 cart = Session["Cart"] as Cart1;
-            string id_pro = "default";
+            string id_pro = form["idPro"]; // Lấy ID_PRODUCT từ form
             int _quantity = int.Parse(form["cartQuantity"]);
+
             cart.Update_quantity(id_pro, _quantity);
+
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
-        public ActionResult RemoveCart(string id)
+        public ActionResult RemoveFromCart(string productId)
         {
             Cart1 cart = Session["Cart"] as Cart1;
-            cart.Remove_CartItem(id);
+
+            if (cart != null)
+            {
+                cart.RemoveProduct(productId);
+                Session["Cart"] = cart;
+            }
+
             return RedirectToAction("ShowCart", "ShoppingCart");
         }
         public PartialViewResult BagCart()
@@ -73,7 +81,7 @@ namespace ILoveKFC.Controllers
             {
                 ID_RECEIPT = Guid.NewGuid().ToString(), // Tạo một ID mới cho hóa đơn
                 ORDER_DATE = DateTime.Now, // Ngày đặt hàng là ngày hiện tại
-                
+
                 // Các thông tin khác của hóa đơn có thể được cập nhật từ form hoặc thông tin khách hàng
                 // Ví dụ: ID_CUSTOMER, DELIVERY_DATE, STATUS_RECEIPT, CODE_DISCOUNT, TOTAL, etc.
             };
@@ -123,7 +131,11 @@ namespace ILoveKFC.Controllers
                 return RedirectToAction("EmptyCart", "Cart");
             }
         }
-    
+        public ActionResult IconCart()
+        {
+            return View();
+        }
+       
 
         public ActionResult CheckOut_Success()
         {

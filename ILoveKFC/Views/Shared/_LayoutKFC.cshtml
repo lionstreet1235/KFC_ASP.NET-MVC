@@ -124,11 +124,15 @@
                     @if (Session["User"] != null)
                     {
                         var kh = Session["User"] as CUSTOMER;
+                       <div class="navbar-item">
+                           @Html.Action("BagCart","ShoppingCart")
+                       </div>
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 @kh.NAME_CUSTOMER
                             </button>
                             <ul class="dropdown-menu css_navbar" aria-labelledby="dropdownMenuButton1">
+                                
                                 <li><a class="dropdown-item" href="@Url.Action("DangXuat","Main")"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</a></li>
                                 <li><a class="dropdown-item" href="@Url.Action("DoiMatKhau","Main",new {@makh=kh.ID_CUSTOMER })"><i class="fas fa-sync"></i>Đổi Mật Khẩu</a></li>
 
@@ -221,53 +225,40 @@
                 }
             </div>
             @*+++++++++FOOTER*@
-            <div class="footer">
+            <div class="footer" style="background-color:black">
 
-                <div class="row mg_top_bot_15">
-                    <div class="col-lg-6 col-md-12">
-                        <a href="#"><img src="~/Img/footer1.png" style="width:100%" /></a>
-                    </div>
+               
 
-                    <div class="col-lg-6 col-md-12">
-                        <a href="#"><img src="~/Img/footer2.png" style="width: 100%;" /></a>
-                    </div>
-                </div>
-
-                <div class="row mg_top_bot_15">
-                    <div class="col-12" style="text-align:center">
-                        <a href="#"><img src="~/Img/logo_footer_vi.png" /></a>
-                    </div>
-                </div>
 
                 <div class="row mg_top_bot_15">
                     <div class="col-md-3">
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">THỰC ĐƠN</a><br />
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">NHÀ HÀNG</a><br />
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">TIN KHUYẾN MÃI</a><br />
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">ĐẶT TIỆC SINH NHẬT</a><br />
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">THÀNH VIÊN</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none; color: lightgray">THỰC ĐƠN</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none; color: lightgray">NHÀ HÀNG</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none; color: lightgray">TIN KHUYẾN MÃI</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none; color: lightgray">ĐẶT TIỆC SINH NHẬT</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none; color: lightgray">THÀNH VIÊN</a><br />
                     </div>
                     <div class="col-md-3">
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">GIỚI THIỆU</a><br />
-                        <a href="#" style="text-decoration: none; color: black">KFC Việt Nam</a><br />
-                        <a href="#" style="text-decoration: none; color: black">Tin tức</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none;color: lightgray">GIỚI THIỆU</a><br />
+                        <a href="#" style="text-decoration: none; color: lightgray">KFC Việt Nam</a><br />
+                        <a href="#" style="text-decoration: none;color: lightgray">Tin tức</a><br />
                     </div>
                     <div class="col-md-3">
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">NGHỀ NGHIỆP</a><br />
-                        <a href="#" style="text-decoration: none; color: black">Tuyển dụng</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none;color: lightgray" ">NGHỀ NGHIỆP</a><br />
+                        <a href="#" style="text-decoration: none; color: lightgray">Tuyển dụng</a><br />
                     </div>
                     <div class="col-md-3">
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">KẾT NỐI VỚI KFC</a><br />
-                        <a href="#" style="text-decoration: none; color: black">Liên hệ</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none;color: lightgray">KẾT NỐI VỚI KFC</a><br />
+                        <a href="#" style="text-decoration: none;color: lightgray">Liên hệ</a><br />
                         <a href="#"><img src="~/Img/icon_fb_red.svg" style="width:20%" /></a>
                         <a href="#"><img src="~/Img/icon_ins_red.svg" style="width:20%" /></a>
                         <a href="#"><img src="~/Img/icon_yt_red.svg" style="width:20%" /></a>
                     </div>
                 </div>
                 <div class="row mg_top_bot_15">
-                    <div class="col-lg-9 col-sm-6" style="text-align:left">
-                        <p>
-                            <a style="font-weight:bold">CÔNG TY LIÊN DOANH TNHH KFC VIỆT NAM</a>
+                    <div class="col-lg-9 col-sm-6" style="text-align:left";>
+                        <p style="color:lightgray">
+                            <a style="font-weight:bold;color: lightgray">CÔNG TY LIÊN DOANH TNHH KFC VIỆT NAM</a>
                             <br />
                             Số 292 Bà Triệu, P. Lê Đại Hành, Q. Hai Bà Trưng, TP. Hà Nội.
                             <br />

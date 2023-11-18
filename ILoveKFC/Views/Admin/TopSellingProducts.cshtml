@@ -1,0 +1,47 @@
+﻿@model List<ILoveKFC.Models.PRODUCT>
+@{
+    ViewBag.Title = "TopSellingProducts";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<style>
+    /* CSS styles here */
+</style>
+
+<h2>TOP SẢN PHẨM BÁN CHẠY</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width: 15%;">ID</th>
+            <th style="width: 35%;">Tên sản phẩm</th>
+            <th style="width: 20%;">Giá</th>
+            <th style="width: 20%;">Số lượng đã bán được</th>
+            <th style="width: 20%;">Doanh thu</th>
+            <!-- Thêm các cột khác tùy ý -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            var revenue = product.QuantitySold * product.COST; // Tính toán doanh thu cho mỗi sản phẩm
+            <tr>
+                <td>@product.ID_PRODUCT</td>
+                <td>@product.NAME_PRODUCT</td>
+                <td>@product.COST</td>
+                <td>@product.QuantitySold</td>
+                <td>@revenue</td>
+                <!-- Thêm các cột khác tùy ý -->
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var totalRevenue = Model.Sum(product => product.QuantitySold * product.COST); // Tính tổng doanh thu từ tất cả sản phẩm
+}
+
+<h2>TỔNG SỐ LUỌNG SẢN PHẨM ĐÃ BÁN ĐƯỢC</h2>
+<p>Total quantity of products sold: @ViewBag.TotalQuantitySold</p>
+
+<h2>DOANH THU</h2>
+<p>Total revenue from products sold: @totalRevenue VNĐ</p>

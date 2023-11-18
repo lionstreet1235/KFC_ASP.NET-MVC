@@ -155,112 +155,99 @@
             <div class="content_wrapper">
                 @{
                     @*//get Url For example,
-                    //if the path is: https:/domain.com/subfolder/controller/action
-                    //Then it will return : http:/domain.com/subfolder/
-                    //For after base path you can use
-                    //Request.Url.AbsolutePath //returns /subfolder/controller/action
-                    //OR you can use
+                            //if the path is: https:/domain.com/subfolder/controller/action
+                            //Then it will return : http:/domain.com/subfolder/
+                            //For after base path you can use
+                            //Request.Url.AbsolutePath //returns /subfolder/controller/action
+                            //OR you can use
 
-                            @RenderBody()
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    @*++++++++++++CAROUSEL*@
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            @*++++++++++++CAROUSEL*@
                     @*<div>
-                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="~/Asset/Image/BTLD.png" class="d-block w-100" style="height: 300px; width: 100%" alt="...">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                                </div>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="~/Asset/Image/BTLD.png" class="d-block w-100" style="height: 300px; width: 100%" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="~/Asset/Image/combo-dinner.png" class="d-block w-100" style="height: 300px; width:100%" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="~/Asset/Image/GaQueKem.png" class="d-block w-100" style="height: 300px; width: 100% " alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="~/Asset/Image/KFC50.png" class="d-block w-100" style="height: 300px; width: 100% " alt="...">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
-                            <div class="carousel-item">
-                                <img src="~/Asset/Image/combo-dinner.png" class="d-block w-100" style="height: 300px; width:100%" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="~/Asset/Image/GaQueKem.png" class="d-block w-100" style="height: 300px; width: 100% " alt="...">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="~/Asset/Image/KFC50.png" class="d-block w-100" style="height: 300px; width: 100% " alt="...">
-                            </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="row" style="background-color:white;padding-top:65px;margin:0">
-                        <div class="col-lg-3 hide">
-                            @Html.Action("DMPartial_BOT", "Main")
-                        </div>
-                        <div class="col-lg-9 col-sm-12">
-                            @RenderBody()
-                        </div>
-                    </div>
-                </div>*@
+                        <div class="content">
+                            <div class="row" style="background-color:white;padding-top:65px;margin:0">
+                                <div class="col-lg-3 hide">
+                                    @Html.Action("DMPartial_BOT", "Main")
+                                </div>
+                                <div class="col-lg-9 col-sm-12">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>*@
                 }
                 }
             </div>
             @*+++++++++FOOTER*@
-            <div class="footer">
+            <div class="footer" style="background-color:black">
 
-                <div class="row mg_top_bot_15">
-                    <div class="col-lg-6 col-md-12">
-                        <a href="#"><img src="~/Img/footer1.png" style="width:100%" /></a>
-                    </div>
 
-                    <div class="col-lg-6 col-md-12">
-                        <a href="#"><img src="~/Img/footer2.png" style="width: 100%;" /></a>
-                    </div>
-                </div>
 
-                <div class="row mg_top_bot_15">
-                    <div class="col-12" style="text-align:center">
-                        <a href="#"><img src="~/Img/logo_footer_vi.png" /></a>
-                    </div>
-                </div>
 
                 <div class="row mg_top_bot_15">
                     <div class="col-md-3">
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">THỰC ĐƠN</a><br />
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">NHÀ HÀNG</a><br />
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">TIN KHUYẾN MÃI</a><br />
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">ĐẶT TIỆC SINH NHẬT</a><br />
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">THÀNH VIÊN</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none; color: lightgray">THỰC ĐƠN</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none; color: lightgray">NHÀ HÀNG</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none; color: lightgray">TIN KHUYẾN MÃI</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none; color: lightgray">ĐẶT TIỆC SINH NHẬT</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none; color: lightgray">THÀNH VIÊN</a><br />
                     </div>
                     <div class="col-md-3">
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">GIỚI THIỆU</a><br />
-                        <a href="#" style="text-decoration: none; color: black">KFC Việt Nam</a><br />
-                        <a href="#" style="text-decoration: none; color: black">Tin tức</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none;color: lightgray">GIỚI THIỆU</a><br />
+                        <a href="#" style="text-decoration: none; color: lightgray">KFC Việt Nam</a><br />
+                        <a href="#" style="text-decoration: none;color: lightgray">Tin tức</a><br />
                     </div>
                     <div class="col-md-3">
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">NGHỀ NGHIỆP</a><br />
-                        <a href="#" style="text-decoration: none; color: black">Tuyển dụng</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none;color: lightgray" ">NGHỀ NGHIỆP</a><br />
+                        <a href="#" style="text-decoration: none; color: lightgray">Tuyển dụng</a><br />
                     </div>
                     <div class="col-md-3">
-                        <a href="#" style="font-weight: bold; text-decoration: none; color: black">KẾT NỐI VỚI KFC</a><br />
-                        <a href="#" style="text-decoration: none; color: black">Liên hệ</a><br />
+                        <a href="#" style="font-weight: bold; text-decoration: none;color: lightgray">KẾT NỐI VỚI KFC</a><br />
+                        <a href="#" style="text-decoration: none;color: lightgray">Liên hệ</a><br />
                         <a href="#"><img src="~/Img/icon_fb_red.svg" style="width:20%" /></a>
                         <a href="#"><img src="~/Img/icon_ins_red.svg" style="width:20%" /></a>
                         <a href="#"><img src="~/Img/icon_yt_red.svg" style="width:20%" /></a>
                     </div>
                 </div>
                 <div class="row mg_top_bot_15">
-                    <div class="col-lg-9 col-sm-6" style="text-align:left">
-                        <p>
-                            <a style="font-weight:bold">CÔNG TY LIÊN DOANH TNHH KFC VIỆT NAM</a>
+                    <div class="col-lg-9 col-sm-6" style="text-align:left" ;>
+                        <p style="color:lightgray">
+                            <a style="font-weight:bold;color: lightgray">CÔNG TY LIÊN DOANH TNHH KFC VIỆT NAM</a>
                             <br />
                             Số 292 Bà Triệu, P. Lê Đại Hành, Q. Hai Bà Trưng, TP. Hà Nội.
                             <br />

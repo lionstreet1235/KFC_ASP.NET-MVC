@@ -15,6 +15,8 @@ namespace ILoveKFC.Models
     public partial class DETAIL_RECEIPT
     {
         public string ID { get; set; }
+
+        public string ID_CUSTOMER {  get; set; }
         public string ID_RECEIPT { get; set; }
         public string ID_PRODUCT { get; set; }
         public Nullable<int> QUANTITY { get; set; }

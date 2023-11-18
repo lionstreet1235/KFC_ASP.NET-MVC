@@ -26,7 +26,8 @@ namespace ILoveKFC.Models
         public string DESCRIBE { get; set; }
         public string IMAGE_PRODUCT { get; set; }
         public string ID_CATEGORY { get; set; }
-    
+        public int QuantitySold { get; set; }
+
         public virtual CATEGORY CATEGORY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETAIL_RECEIPT> DETAIL_RECEIPT { get; set; }

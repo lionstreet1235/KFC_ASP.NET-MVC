@@ -14,6 +14,33 @@
         top: 16px;
         right: 226px;
     }
+
+    .cart-icon {
+        position: relative;
+        display: inline-block;
+    }
+
+    .cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        text-align: center;
+        line-height: 18px;
+        font-size: 10px;
+    }
 </style>
-<span class="cart-badge">@ViewBag.QuantityCart</span>
+
+
+<!-- Sử dụng class .cart-icon cho thẻ chứa icon giỏ hàng và số lượng -->
+<div class="cart-icon">
+    <a href="@Url.Action("ShowCart","ShoppingCart")">
+        <img src="~/Asset/Image/KfcCart.png">
+    </a>
+    <span class="cart-badge">@ViewBag.QuantityCart</span>
+</div>
 

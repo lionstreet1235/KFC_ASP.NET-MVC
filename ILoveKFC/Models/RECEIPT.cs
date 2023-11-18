@@ -27,7 +27,10 @@ namespace ILoveKFC.Models
         public string STATUS_RECEIPT { get; set; }
         public string CODE_DISCOUNT { get; set; }
         public Nullable<decimal> TOTAL { get; set; }
-    
+
+        public string CUSTOMER_NAME { get; set; }
+        public string CUSTOMER_ADDRESS { get; set; }
+
         public virtual CUSTOMER CUSTOMER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETAIL_RECEIPT> DETAIL_RECEIPT { get; set; }

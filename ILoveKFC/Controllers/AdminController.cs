@@ -168,27 +168,36 @@ namespace ILoveKFC.Controllers
         {
             var date = f["txtdate"];
             var state = f["txtState"];
+            var customerName = f["txtCustomerName"]; // Thêm dòng này để lấy tên khách hàng từ Form
+            var customerAddress = f["txtCustomerAddress"]; // Thêm dòng này để lấy địa chỉ khách hàng từ Form
 
             if (date != null && state != null)
             {
-                RECEIPT hoadon = db.RECEIPTs.SingleOrDefault(t => t.ID_RECEIPT == mahd);//lấy ra đối tượng cần sửa
-                hoadon.DELIVERY_DATE = Convert.ToDateTime(date);//gán lại cho những thuộc tính cần sửa
-                hoadon.STATUS_RECEIPT = state;
-                db.SaveChanges(); ;//lưu
+                RECEIPT hoadon = db.RECEIPTs.SingleOrDefault(t => t.ID_RECEIPT == mahd);
+                if (hoadon != null)
+                {
+                    hoadon.DELIVERY_DATE = Convert.ToDateTime(date);
+                    hoadon.STATUS_RECEIPT = state;
 
+                    // Gán thông tin khách hàng vào hóa đơn
+                    hoadon.CUSTOMER_NAME = customerName;
+                    hoadon.CUSTOMER_ADDRESS = customerAddress;
+
+                    db.SaveChanges();
+                }
             }
-            List<RECEIPT> list = db.RECEIPTs.Where(t => t.ID_RECEIPT != null).ToList();
 
+            List<RECEIPT> list = db.RECEIPTs.Where(t => t.ID_RECEIPT != null).ToList();
             return View(list);
         }
-
         public ActionResult DetailReceipt(string mahd, string makh)
         {
             //lay thong tin kh
             CUSTOMER kh = db.CUSTOMERs.SingleOrDefault(t => t.ID_CUSTOMER == makh);
             //lay chi tiet hoa don
             List<DETAIL_RECEIPT> list = db.DETAIL_RECEIPT.Where(t => t.ID_RECEIPT == mahd).ToList();
-            ViewBag.Tenkh = kh.NAME_CUSTOMER;
+            //ViewBag.Tenkh = kh.NAME_CUSTOMER;
+
             ViewBag.Mahd = mahd;
             return View(list);
         }
@@ -314,7 +323,36 @@ namespace ILoveKFC.Controllers
             // Trả về view để hiển thị thông tin thống kê
             return View();
         }
+        public ActionResult TopSellingProducts()
+        {
+            // Lấy danh sách ID sản phẩm bán chạy từ cơ sở dữ liệu (ví dụ: lấy 10 sản phẩm bán chạy nhất)
+            var topSellingProductIds = db.DETAIL_RECEIPT
+            .GroupBy(detail => detail.ID_PRODUCT)
+            .OrderByDescending(group => group.Count())
+            .Take(10)
+            .Select(group => group.Key)
+            .ToList();
+            var topSellingProducts = db.PRODUCTs
+            .Where(product => topSellingProductIds.Contains(product.ID_PRODUCT)).ToList();
+            foreach (var product in topSellingProducts)
+            {
+                var quantitySold = db.DETAIL_RECEIPT
+                    .Where(detail => detail.ID_PRODUCT == product.ID_PRODUCT && detail.QUANTITY != null)
+                    .Sum(detail => detail.QUANTITY) ?? 0;
 
+                product.QuantitySold = quantitySold;
+            }
+
+            var totalQuantitySold = db.DETAIL_RECEIPT.Where(detail => detail.QUANTITY != null).Sum(detail => detail.QUANTITY);
+
+
+
+            ViewBag.TopSellingProducts = topSellingProducts;
+            ViewBag.TotalQuantitySold = totalQuantitySold;
+
+            return View(topSellingProducts);
+        }
+     
         public ActionResult DangXuat()
         {
             Session["Admin"] = null;
