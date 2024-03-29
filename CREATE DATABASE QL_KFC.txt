@@ -1,0 +1,284 @@
+CREATE DATABASE QL_KFC
+GO
+USE QL_KFC
+GO
+
+USE MASTER
+GO
+--DROP DATABASE QL_KFC
+--GO
+
+
+--DANH MUC
+CREATE TABLE CATEGORY
+(
+ ID_CATEGORY CHAR(50) NOT NULL,
+ NAME_CATEGORY NVARCHAR(50),
+ POSITION CHAR(10)
+)
+--SAN PHAM
+CREATE TABLE PRODUCT
+(
+ ID_PRODUCT CHAR(50) NOT NULL,
+ NAME_PRODUCT NVARCHAR(50),
+ COST INT,
+ DESCRIBE NVARCHAR(MAX),
+ IMAGE_PRODUCT NVARCHAR(MAX),
+ ID_CATEGORY CHAR(50), 
+)
+--KHACH HANG
+CREATE TABLE CUSTOMER
+( 
+ ID_CUSTOMER CHAR(50) NOT NULL,--PK
+ NAME_CUSTOMER NVARCHAR(50),
+ DATEOFBIRTH_CUSTOMER DATETIME,
+ --DIA CHI
+ ADDRESS_CITY NVARCHAR(MAX),
+ ADDRESS_DISTRICT NVARCHAR(MAX),
+ ADDRESS_WARD NVARCHAR(MAX),
+ ADDRESS_CUSTOMER NVARCHAR(MAX),
+ PHONE_CUSTOMER CHAR(11),
+ GMAIL NVARCHAR(30),
+ SEX_CUSTOMER CHAR(10),
+)
+--NHAN VIEN
+CREATE TABLE EMPLOYEE
+( 
+ ID_EMPLOYEE CHAR(50) NOT NULL,
+ NAME_EMPLOYEE NVARCHAR(50),
+ DATEOFBIRTH_EMPLOYEE DATETIME,
+ ADDRESS_EMPLOYEE NVARCHAR(MAX),
+ PHONE_EMPLOYEE CHAR(11),
+ GMAIL NVARCHAR(30),
+ SEX_EMPLOYEE CHAR(10),
+)
+--
+CREATE TABLE DISCOUNT
+(
+ CODE_DISCOUNT CHAR(50) primary key not null,--ma giam gia, abc234
+ PERCENT_DISCOUNT int,--30%
+ MONEY_DISCOUNT float,--toi da 50k
+ START_DAY date,--1/11- bao chua toi ngay ap dung
+ END_DAY date,--10/11, uqa ngay thi bao qua ngay
+ QUANTITY int--1000 so luong ma giam gia co the ap dung; -1: ap dung vo han, het luot thi bao ma dung het
+)
+CREATE TABLE  ACCOUNT_CUSTOMER
+(
+ USERNAME_CUSTOMER NVARCHAR(50) PRIMARY KEY NOT NULL,--PK
+ PASSWORD_CUSTOMER NVARCHAR (50),
+ ID_CUSTOMER char(50) NOT NULL,
+)
+
+CREATE TABLE  ACCOUNT_EMPLOYEE
+(
+ USERNAME_EMPLOYEE NVARCHAR(50) PRIMARY KEY NOT NULL,--PK
+ PASSWORD_EMPLOYEE NVARCHAR (50),
+ ID_EMPLOYEE char(50) NOT NULL,
+ TYPE_ACCOUNT int --0: khach, 1L nhan vien, 2-quan li
+)
+--HOA DON
+CREATE TABLE RECEIPT
+(
+ ID_RECEIPT CHAR(50) NOT NULL,
+ ID_CUSTOMER CHAR(50),
+ ORDER_DATE DATETIME,
+ DELIVERY_DATE DATETIME,
+ STATUS_RECEIPT NVARCHAR(MAX),
+ CODE_DISCOUNT CHAR(50),
+ TOTAL MONEY,
+)
+--CHI TIET HOA DON
+CREATE TABLE DETAIL_RECEIPT  
+(
+ ID CHAR(50) NOT NULL,
+ ID_RECEIPT CHAR(50) NOT NULL,
+ ID_PRODUCT CHAR(50) NOT NULL,
+ QUANTITY INT,
+ COST INT
+)
+
+CREATE TABLE CART
+(
+ ID_PRODUCT CHAR(50) NOT NULL,
+ ID_CUSTOMER CHAR(50) NOT NULL,
+ IMAGE_PRODUCT NVARCHAR(MAX),
+ DESCRIBE NVARCHAR(MAX),
+ NAME_PRODUCT NVARCHAR(50),
+ COST INT,
+ QUANTITY_PRODUCT INT,
+ TOTAL INT
+)
+
+alter table CART
+add DESCRIBE NVARCHAR(MAX),
+
+--PRIMARY KEY
+--MENU
+--DANH MUC
+ALTER TABLE CATEGORY
+ADD CONSTRAINT PK_CATE PRIMARY KEY(ID_CATEGORY)
+--SAN PHAM
+ALTER TABLE PRODUCT
+ADD CONSTRAINT PK_PRODUCT PRIMARY KEY(ID_PRODUCT)
+--KHACH HANG
+ALTER TABLE CUSTOMER
+ADD CONSTRAINT PK_CUSTOMER PRIMARY KEY(ID_CUSTOMER)
+--NHAN VIEN
+ALTER TABLE EMPLOYEE
+ADD CONSTRAINT PK_EMPLOYEE PRIMARY KEY(ID_EMPLOYEE)
+--HOADON
+ALTER TABLE RECEIPT
+ADD CONSTRAINT PK_RECEIPT PRIMARY KEY(ID_RECEIPT)
+--CHITIET HOADON
+ALTER TABLE DETAIL_RECEIPT
+ADD CONSTRAINT PK_DETAIL_RECEIPT PRIMARY KEY(ID)
+ALTER TABLE CART
+ADD CONSTRAINT PK_CART PRIMARY KEY(ID_PRODUCT,ID_CUSTOMER) 
+
+--FOREIGN KEY
+--SAN PHAM-> DANH MUC
+ALTER TABLE PRODUCT
+ADD CONSTRAINT FK_PRO_CATE FOREIGN KEY(ID_CATEGORY) REFERENCES CATEGORY(ID_CATEGORY)
+--HOADON -> NHANVIEN,HOADON->KHACHHANG
+ALTER TABLE RECEIPT
+ADD CONSTRAINT FK_RECEIPT_CUSTOMER FOREIGN KEY(ID_CUSTOMER) REFERENCES CUSTOMER(ID_CUSTOMER)
+--HOADON -> GIAMGIA
+ALTER TABLE RECEIPT
+ADD CONSTRAINT FK_RECEIPT_DISCOUNT FOREIGN KEY(CODE_DISCOUNT) REFERENCES DISCOUNT(CODE_DISCOUNT)
+--CHITIET HOADON->HOADON,CT HOADON->SANPHAM
+ALTER TABLE DETAIL_RECEIPT
+ADD CONSTRAINT FK_DETAIL_RECEIPT_TO_RECEIPT FOREIGN KEY(ID_RECEIPT) REFERENCES RECEIPT(ID_RECEIPT)
+ALTER TABLE DETAIL_RECEIPT
+ADD CONSTRAINT FK_DETAIL_RECEIPT_TO_PRODUCT FOREIGN KEY(ID_PRODUCT) REFERENCES PRODUCT(ID_PRODUCT)
+--TAI KHOAN KH -> KH 
+ALTER TABLE ACCOUNT_CUSTOMER
+ADD CONSTRAINT FK_ACC_CUS_TO_CUS FOREIGN KEY(ID_CUSTOMER) REFERENCES CUSTOMER(ID_CUSTOMER)
+--TAI KHOAN NV->NV
+ALTER TABLE ACCOUNT_EMPLOYEE
+ADD CONSTRAINT FK_ACC_EMP_TO_EMP FOREIGN KEY(ID_EMPLOYEE) REFERENCES EMPLOYEE(ID_EMPLOYEE)
+ALTER TABLE CART
+ADD CONSTRAINT FK_CART_CUSTOMER FOREIGN KEY(ID_CUSTOMER) REFERENCES CUSTOMER(ID_CUSTOMER)
+
+
+INSERT INTO CATEGORY 
+(ID_CATEGORY,NAME_CATEGORY,POSITION)
+VALUES
+('DM001',N'COMBO 1 NGƯỜI','TOP'),
+('DM002',N'COMBO NHÓM','TOP'),
+('DM003',N'MENU ƯU ĐÃI','TOP'),
+('DM005',N'Gà Rán - Quay','BOT'),
+('DM006',N'Cơm - Burger','BOT'),
+('DM007',N'Thức Ăn Nhẹ','BOT'),
+('DM008',N'Tráng Miệng - Thức Uống','BOT')
+INSERT INTO PRODUCT
+(ID_PRODUCT,NAME_PRODUCT,COST,DESCRIBE,IMAGE_PRODUCT,ID_CATEGORY) 
+VALUES 
+--COMBO 1 NGUOI
+('SP001',N'COMBO GÀ RÁN A',77000,N'2 Miếng Gà Giòn Cay / 2 Miếng Gà Giòn Không Cay / 2 Miếng Gà Truyền thống 1 Pepsi Lon','001.jpg','DM001'),
+('SP002',N'COMBO GÀ RÁN B',77000,N'1 Phần Hot Wings 3 Miếng 1 Khoai Tây Chiên (Lớn) 1 Pepsi Lon','002.jpg','DM001'),
+('SP003',N'COMBO GÀ RÁN C',83000,N'1 Miếng Gà Giòn Cay / 1 Miếng Gà Giòn Không Cay / 1 Miếng Gà Truyền Thống 1 Burger Tôm 1 Pepsi Lon','003.jpg','DM001'),
+('SP004',N'COMBO GÀ RÁN D',70000,N'1 Miếng Gà Giòn Cay / 1 Miếng Gà Giòn Không Cay / 1 Miếng Gà Truyền Thống 1 Burger Gà Quay Flava / 1 Burger Zinger 1 Pepsi Lon','004.jpg','DM001'),
+('SP005',N'COMBO CƠM A',70000,N'1 Cơm Gà Giòn Cay / 1 Cơm Gà Giòn Không Cay / 1 Cơm Gà Truyền Thống / 1 Cơm Phi-lê Gà Quay Flava / 1 Cơm Phi-lê Gà Quay Tiêu / 1 Cơm Phi-lê Gà Giòn / 1 Cơm Gà Xiên Que 1 Miếng Gà Giòn Cay / 1 Miếng Gà Truyền Thống / 1 Miếng Gà Giòn Không Cay 1 Pepsi Lon','005.jpg','DM001'),
+('SP006',N'COMBO CƠM B',70000,N'1 Cơm Gà Giòn Cay / 1 Cơm Gà Giòn Không Cay / 1 Cơm Gà Truyền Thống / 1 Cơm Phi-lê Gà Quay Flava / 1 Cơm Phi-lê Gà Quay Tiêu / 1 Cơm Phi-lê Gà Giòn / 1 Cơm Gà Xiên Que 1 Burger Gà Quay Flava / 1 Burger Zinger 1 Pepsi Lon','006.jpg','DM001'),
+--COMBO NHOM
+('SP007',N'COMBO NHÓM A',125000,N'2 Miếng Gà Giòn Cay / 2 Miếng Gà Giòn Không Cay / 2 Miếng Gà Truyền thống 1 Burger Tôm 2 Pepsi Lon','007.jpg','DM002'),
+('SP008',N'COMBO NHÓM B',145000,N'3 Miếng Gà Giòn Cay / 3 Miếng Gà Giòn Không Cay / 3 Miếng Gà Truyền Thống 1 Khoai Tây Chiên (Lớn) 2 Pepsi Lon','008.jpg','DM002'),
+('SP009',N'COMBO NHÓM C',180000,N'4 Miếng Gà Giòn Cay / 4 Miếng Gà Giòn Không Cay / 4 Miếng Gà Truyền thống 1 Khoai Tây Chiên (Lớn) 2 Pepsi Lon','009.jpg','DM002'),
+('SP010',N'COMBO NHÓM D',180000,N'2 Miếng Gà Giòn Cay / 2 Miếng Gà Giòn Không Cay / 2 Miếng Gà Truyền thống 1 Miếng Gà Quay Giấy Bạc / 1 Miếng Gà Quay Tiêu 1 Khoai Tây Chiên (Lớn) 2 Pepsi Lon','010.jpg','DM002'),
+('SP011',N'COMBO NHÓM E',194000,N'3 Miếng Gà Giòn Cay / 3 Miếng Gà Giòn Không Cay / 3 Miếng Gà Truyền Thống 1 Burger Gà Quay Flava / 1 Burger Zinger 1 Khoai Tây Chiên (Lớn) 2 Pepsi Lon','011.jpg','DM002'),
+('SP012',N'COMBO NHÓM F',199000,N'3 Miếng Gà Giòn Cay / 3 Miếng Gà Giòn Không Cay / 3 Miếng Gà Truyền Thống 1 Popcorn (Lớn) 1 Khoai Tây Chiên (Lớn) 2 Pepsi Lon','012.jpg','DM002'),
+('SP013',N'COMBO GIA ĐÌNH A',349000,N'8 Miếng Gà Giòn Cay / 8 Miếng Gà Giòn Không Cay / 8 Miếng Gà Truyền Thống 2 Khoai Tây Chiên (Lớn) 4 Pepsi Lon','013.jpg','DM002'),
+('SP014',N'COMBO GIA ĐÌNH B',359000,N'5 Miếng Gà Giòn Cay / 5 Miếng Gà Giòn Không Cay / 5 Miếng Gà Truyền Thống 2 Burger Gà Quay Flava / 2 Burger Zinger 2 Khoai Tây Chiên (Lớn) 3 Pepsi Lon','014.jpg','DM002'),
+--COMBO UU DAI
+('SP015',N'Gà Rán (3 Miếng)',66000,N'3 Miếng Gà Truyền Thống / 3 Miếng Gà Giòn Không Cay / 3 Miếng Gà Giòn Cay','015.png','DM003'),
+('SP016',N'Gà Rán (4 Miếng)',84000,N'4 Miếng Gà Truyền thống / 4 Miếng Gà Giòn Không Cay / 4 Miếng Gà Giòn Cay','016.png','DM003'),
+('SP017',N'XIÊN GÀ TENDERODS (2 XIÊN)',35000,N'1 Cơm Xiên Gà Tenderods 1 Pepsi Lon','017.jpg','DM003'),
+('SP018',N'COMBO TENDERODS HDA',57000,N'2 Xiên Gà Tenderods 1 Burger Tôm 1 Pepsi Lon','018.jpg','DM003'),
+('SP019',N'COMBO TENDERODS HDB',83000,N'2 Xiên Gà Tenderods 1 Burger Tôm 1 Pepsi Lon','019.jpg','DM003'),
+('SP020',N'COMBO TENDERODS HDC',87000,N'2 Xiên Gà Tenderods 2 Miếng Gà Giòn Cay / 2 Miếng Gà Giòn Không Cay / 2 Miếng Gà Truyền thống','020.jpg','DM003'),
+('SP021',N'COMBO TENDERODS HDD',155000,N'3 Xiên Gà Tenderods 4 Miếng Gà Giòn Cay / 4 Miếng Gà Giòn Không Cay / 4 Miếng Gà Truyền thống','021.jpg','DM003'),
+('SP022',N'THANH BÍ PHÔ-MAI (2 THANH)',25000,N'2 Thanh Bí Phô-mai','022.png','DM003'),
+('SP023',N'THANH BÍ PHÔ-MAI (3 THANH)',31000,N'3 Thanh Bí Phô-mai','023.png','DM003'),
+('SP024',N'THANH BÍ PHÔ-MAI (5 THANH)',51000,N'5 Thanh Bí Phô-mai','024.png','DM003'),
+('SP025',N'COMBO THANH BÍ PHÔ-MAI HDA',91000,N'2 Miếng Gà Giòn Cay / 2 Miếng Gà Giòn Không Cay / 2 Miếng Gà Truyền thống2 Thanh Bí Phô-mai 1 Pepsi Lon','025.png','DM003'),
+('SP026',N'COMBO THANH BÍ PHÔ-MAI HDB',72000,N'1 Burger Gà Quay Flava / 1 Burger Zinger / 1 Burger Tôm 2 Thanh Bí Phô-mai 1 Pepsi Lon','026.png','DM003'),
+('SP027',N'COMBO THANH BÍ PHÔ-MAI HDC',184000,N'4 Miếng Gà Giòn Cay / 4 Miếng Gà Truyền thống / 4 Miếng Gà Giòn Không Cay 4 Thanh Bí Phô-mai 2 Pepsi Lon','027.png','DM003'),
+('SP028',N'GÀ BÍT-TẾT VỚI CƠM',40000,N'1 Phần Gà Bít-tết với Cơm','028.png','DM003'),
+('SP029',N'GÀ BÍT-TẾT VỚI KHOAI TÂY CHIÊN',40000,N'1 Phần Gà Bít-tết với Cơm','029.png','DM003'),
+('SP030',N'COMBO GÀ BÍT-TẾT HDA',79000,N'1 Phần Gà Bít-tết với Cơm','030.png','DM003'),
+('SP031',N'COMBO GÀ BÍT-TẾT HDB',79000,N'1 Phần Gà Bít-tết với Cơm','031.png','DM003'),
+
+--MON LE 
+ --GA RAN 05
+('SP032',N'Gà Rán (1 Miếng)',35000,N'1 Miếng Gà Giòn Cay / 1 Miếng Gà Giòn Không Cay / 1 Miếng Gà Truyền Thống','032.jpg','DM005'),
+('SP033',N'Gà Rán (2 Miếng)',66000,N'2 Miếng Gà Giòn Cay / 2 Miếng Gà Giòn Không Cay / 2 Miếng Gà Truyền thống','033.jpg','DM005'),
+('SP034',N'Gà Rán (3 Miếng)',96000,N'3 Miếng Gà Giòn Cay / 3 Miếng Gà Truyền Thống / 3 Miếng Gà Giòn Không Cay','034.jpg','DM005'),
+('SP035',N'Gà Rán (6 Miếng)',190000,N'6 Miếng Gà Giòn Cay / 6 Miếng Gà Truyền thống / 6 Miếng Gà Giòn Không Cay','035.jpg','DM005'),
+('SP036',N'Gà Rán (9 Miếng)',281000,N'9 Miếng Gà Giòn Cay / 9 Miếng Gà Truyền Thống / 9 Miếng Gà Giòn Không Cay','036.jpg','DM005'),
+('SP037',N'Gà Rán (12 Miếng)',369000,N'12 Miếng Gà Giòn Cay / 12 Miếng Gà Truyền Thống / 12 Miếng Gà Giòn Không Cay','037.jpg','DM005'),
+('SP038',N'Gà Quay (1 Miếng)',66000,N'1 Miếng Gà Quay Giấy Bạc / 1 Miếng Gà Quay Tiêu','038.jpg','DM005'),
+('SP039',N'Phần Hot Wings 3 Miếng',48000,N'Phần Hot Wings 3 Miếng','039.jpg','DM005'),
+('SP040',N'Phần Hot Wings 5 Miếng',69000,N'Phần Hot Wings 5 Miếng','040.jpg','DM005'),
+
+ --COM BURGER 06
+('SP041',N'Cơm Gà Truyền Thống (1 Phần)',40000,N'Cơm Gà Truyền Thống (1 Phần)','041.jpg','DM006'),
+('SP042',N'Cơm Gà Giòn Cay (1 Phần)',40000,N'Cơm Gà Giòn Cay (1 Phần)','042.jpg','DM006'),
+('SP043',N'Cơm Gà Giòn Không Cay (1 Phần)',40000,N'Cơm Gà Giòn Không Cay (1 Phần)','043.jpg','DM006'),
+('SP044',N'Cơm Phi Lê Gà Quay Tiêu (1 Phần)',40000,N'Cơm Phi Lê Gà Quay Tiêu (1 Phần)','044.jpg','DM006'),
+('SP045',N'Cơm Phi Lê Gà Quay Flava (1 Phần)',40000,N'Cơm Phi Lê Gà Quay Flava (1 Phần)','045.jpg','DM006'),
+('SP046',N'Cơm Phi Lê Gà Giòn (1 Phần)',40000,N'Cơm Phi Lê Gà Giòn (1 Phần)','046.jpg','DM006'),
+('SP047',N'Cơm Gà Xiên Que (1 Phần)',40000,N'Cơm Gà Xiên Que (1 Phần)','047.jpg','DM006'),
+('SP048',N'Burger Tôm (1 Phần)',41000,N'Burger Tôm (1 Phần)','048.jpg','DM006'),
+('SP049',N'Burger Gà Quay Flava (1 Phần)',46000,N'Burger Gà Quay Flava (1 Phần)','049.jpg','DM006'),
+('SP050',N'Burger Zinger (1 Phần)',50000,N'Burger Zinger (1 Phần)','050.jpg','DM006'),
+ --AN NHE 07
+('SP051',N'Popcorn (Vừa)',36000,N'','051.jpg','DM007'),
+('SP052',N'Popcorn (Lớn)',55000,N'','052.jpg','DM007'),
+('SP053',N'Phô mai viên (4 viên)',28000,N'','053.jpg','DM007'),
+('SP054',N'Phô mai viên (6 viên)',38000,N'','054.jpg','DM007'),
+('SP055',N'Khoai Tây Viên Nhân Gravy (3 viên)',18000,N'','055.jpg','DM007'),
+('SP056',N'Khoai Tây Viên Nhân Gravy (5 viên)',28000,N'','056.jpg','DM007'),
+('SP057',N'Cá Thanh (3 Thanh)',40000,N'','057.jpg','DM007'),
+('SP058',N'Gà Xiên Que (2 Thanh)',30000,N'','058.jpg','DM007'),
+('SP059',N'Khoai Tây Chiên (Vừa)',14000,N'','059.jpg','DM007'),
+('SP060',N'Khoai Tây Chiên (Lớn)',26000,N'','060.jpg','DM007'),
+('SP061',N'Khoai Tây Chiên (Đại)',36000,N'','061.jpg','DM007'),
+('SP062',N'Bắp cải trộn (Vừa)',12000,N'','062.jpg','DM007'),
+('SP063',N'Bắp cải trộn (Lớn)',21000,N'','063.jpg','DM007'),
+('SP064',N'Bắp Cải Trộn (Đại)',31000,N'','064.jpg','DM007'),
+('SP065',N'Khoai tây nghiền (Vừa)',12000,N'','065.jpg','DM007'),
+('SP066',N'Khoai tây nghiền (Lớn)',21000,N'','066.jpg','DM007'),
+('SP067',N'Khoai tây nghiền (Đại)',31000,N'','067.jpg','DM007'),
+('SP068',N'Cơm Trắng',10000,N'','068.jpg','DM007'),
+('SP069',N'Súp rong biển (1 phần)',14000,N'','089.jpg','DM007'),
+ --TRANG MIENG 08
+('SP070',N'Mocktail Ổi Hạt Chia',14000,N'','070.png','DM008'),
+('SP071',N'Bánh Trứng (1 cái)',14000,N'','071.jpg','DM008'),
+('SP072',N'Bánh Trứng (4 Cái)',14000,N'','072.jpg','DM008'),
+('SP073',N'Pepsi Vị Chanh Không Calo Lon',14000,N'','073.png','DM008'),
+('SP074',N'Pepsi Lon',14000,N'','074.png','DM008'),
+('SP075',N'7Up Lon',14000,N'','075.png','DM008'),
+('SP076',N'Hộp Milo',14000,N'','076.jpg','DM008'),
+('SP077',N'Aquafina',14000,N'','077.jpg','DM008'),
+('SP078',N'Trà đào',14000,N'','078.jpg','DM008'),
+('SP079',N'Mirinda Cam Lon',14000,N'','079.png','DM008')
+SET DATEFORMAT DMY;
+INSERT INTO CUSTOMER
+(ID_CUSTOMER,NAME_CUSTOMER,DATEOFBIRTH_CUSTOMER,ADDRESS_CITY,ADDRESS_DISTRICT,ADDRESS_WARD,ADDRESS_CUSTOMER,PHONE_CUSTOMER,GMAIL,SEX_CUSTOMER)
+VALUES
+('kh001',N'PHẠM MINH TOÀN','20-05-2001',N'HỒ CHÍ MINH',N'8','15',N'1125 BÌNH ĐÔNG','0901395705','phamtoan2005@gmail.com',N'NAM')
+
+INSERT INTO ACCOUNT_CUSTOMER
+(USERNAME_CUSTOMER,PASSWORD_CUSTOMER,ID_CUSTOMER)
+values
+('toan','123','kh001')
+
+INSERT INTO EMPLOYEE
+(ID_EMPLOYEE ,NAME_EMPLOYEE,DATEOFBIRTH_EMPLOYEE,ADDRESS_EMPLOYEE,PHONE_EMPLOYEE,GMAIL,SEX_EMPLOYEE)
+VALUES
+('NV00001','MINH TOAN','20-5-2001','31-32 TRAN HUNG DAO Q5 TPHCM','0901395705','',N'NAM')
+
+INSERT INTO ACCOUNT_EMPLOYEE
+(USERNAME_EMPLOYEE,PASSWORD_EMPLOYEE,ID_EMPLOYEE,TYPE_ACCOUNT)
+VALUES
+('toan','123','NV00001',1)
